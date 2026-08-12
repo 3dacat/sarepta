@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сарепта — Собери урожай</title>
+    <style>
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0b2b4a;
+            padding: 20px;
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+        .game-wrapper {
+            max-width: 900px;
+            width: 100%;
+            background: linear-gradient(145deg, #fef7e0, #f5e6b8);
+            border-radius: 40px;
+            padding: 30px 30px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 4px rgba(255, 255, 200, 0.6);
+            border: 2px solid #d4b87a;
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #b8944c;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-area .logo-placeholder {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #c9922b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: #fef7e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .logo-area .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-area h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3f5c;
+            letter-spacing: 1px;
+        }
+
+        .logo-area h1 span {
+            color: #c9922b;
+        }
+
+        .stats {
+            display: flex;
+            gap: 25px;
+            background: rgba(26, 63, 92, 0.10);
+            padding: 8px 20px;
+            border-radius: 60px;
+            border: 1px solid #d4b87a;
+            align-items: center;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a3f5c;
+        }
+
+        .stat-item .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #c9922b;
+        }
+
+        .stat-item .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .stat-item .value {
+            min-width: 40px;
+            text-align: center;
+            background: white;
+            padding: 0 12px;
+            border-radius: 40px;
+            color: #0b2b4a;
+        }
+
+        /* ===== ОСНОВНАЯ СЕТКА ===== */
+        .game-grid {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        /* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
+        .clicker-panel {
+            background: rgba(255, 248, 225, 0.7);
+            border-radius: 28px;
+            padding: 25px 16px 30px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 18px rgba(0, 0, 0, 0.12);
+            border: 1px solid #dcc18a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .clicker-panel h2 {
+            font-size: 16px;
+            color: #1a3f5c;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .clicker-panel .sub {
+            font-size: 12px;
+            color: #7a643a;
+            margin-bottom: 18px;
+        }
+
+        /* КНОПКА-БУТЫЛКА */
+        .bottle-btn {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #f9e7b3, #dbb063);
+            border: 5px solid #b8944c;
+            box-shadow: 0 8px 0 #7a5f2e, 0 10px 24px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.08s ease;
+            padding: 12px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bottle-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #7a5f2e, 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .bottle-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            pointer-events: none;
+        }
+
+        .bottle-btn .click-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.4), transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.12s;
+        }
+
+        .bottle-btn:active .click-effect {
+            opacity: 1;
+        }
+
+        .clicker-stats {
+            width: 100%;
+            text-align: center;
+        }
+
+        .clicker-stats p {
+            font-size: 15px;
+            color: #1a3f5c;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 5px 10px;
+            border-radius: 40px;
+        }
+
+        .clicker-stats .highlight {
+            font-weight: 700;
+            color: #c9922b;
+            font-size: 18px;
+        }
+
+        /* КНОПКИ УЛУЧШЕНИЙ */
+        .upgrades {
+            margin-top: 16px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .upgrade-btn {
+            background: #1a3f5c;
+            border: none;
+            border-radius: 60px;
+            padding: 10px 14px;
+            color: #fef7e0;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 0 #0b2b4a;
+        }
+
+        .upgrade-btn:hover {
+            background: #235a80;
+            transform: scale(1.02);
+        }
+
+        .upgrade-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #0b2b4a;
+        }
+
+        .upgrade-btn .price {
+            background: #c9922b;
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .upgrade-btn .price .price-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #b8944c;
+        }
+
+        .upgrade-btn .price .price-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upgrade-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+
+        /* ===== ПРАВАЯ ПАНЕЛЬ ===== */
+        .match3-panel {
+            background: rgba(26, 63, 92, 0.06);
+            border-radius: 28px;
+            padding: 18px 18px 22px;
+            border: 1px solid #dcc18a;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .match3-panel .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .match3-panel .match-header h3 {
+            color: #1a3f5c;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .match3-panel .match-header .hint {
+            font-size: 13px;
+            color: #7a643a;
+            background: rgba(255, 255, 200, 0.6);
+            padding: 3px 14px;
+            border-radius: 40px;
+        }
+
+        /* Игровое поле 8x8 */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            aspect-ratio: 1/1;
+            background: #dcc18a;
+            padding: 8px;
+            border-radius: 20px;
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 12px;
+        }
+
+        .cell {
+            background: #f5e6b8;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            box-shadow: 0 2px 0 #b8944c;
+            aspect-ratio: 1/1;
+            padding: 10%;
+            overflow: hidden;
+        }
+
+        .cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            transition: transform 0.15s ease;
+        }
+
+        .cell.selected {
+            box-shadow: 0 0 0 4px #c9922b, 0 0 0 8px rgba(201, 146, 43, 0.25);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .cell.selected img {
+            transform: scale(1.1);
+        }
+
+        .cell.removing {
+            animation: pop 0.2s ease forwards;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        .cell.falling {
+            animation: fall 0.25s ease;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .match-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4px;
+        }
+
+        .match-footer .combo-info {
+            color: #1a3f5c;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .match-footer .combo-info span {
+            color: #c9922b;
+            font-size: 20px;
+        }
+
+        .shuffle-btn {
+            background: #c9922b;
+            border: none;
+            border-radius: 40px;
+            padding: 6px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #1a1a1a;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #7a5f2e;
+            transition: 0.08s;
+        }
+
+        .shuffle-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #7a5f2e;
+        }
+
+        /* ===== ТОСТ ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a3f5c;
+            color: #fef7e0;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 999;
+            border: 2px solid #c9922b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast .toast-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #c9922b;
+        }
+
+        .toast .toast-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 780px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+            .clicker-panel {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+                padding: 18px;
+            }
+            .bottle-btn {
+                width: 100px;
+                height: 100px;
+            }
+            .clicker-stats {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .clicker-stats p {
+                margin: 0;
+            }
+            .stats {
+                gap: 14px;
+                padding: 6px 14px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .stat-item {
+                font-size: 15px;
+            }
+            .board {
+                gap: 4px;
+                padding: 6px;
+            }
+            .cell {
+                border-radius: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-wrapper {
+                padding: 16px;
+            }
+            .logo-area h1 {
+                font-size: 20px;
+            }
+            .cell {
+                border-radius: 6px;
+                padding: 6%;
+            }
+            .board {
+                gap: 3px;
+                padding: 4px;
+            }
+            .bottle-btn {
+                width: 80px;
+                height: 80px;
+                padding: 8px;
+            }
+            .header {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ ===== -->
+    <div id="toast" class="toast">
+        <div class="toast-icon">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='25' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='10' width='30' height='20' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="масло" />
+        </div>
+        <span id="toastMessage">✨ +10 бутылок!</span>
+    </div>
+
+    <!-- ===== ОБЁРТКА ИГРЫ ===== -->
+    <div class="game-wrapper">
+
+        <!-- ШАПКА -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo-placeholder">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23c9922b' rx='12'/%3E%3Crect x='25' y='30' width='50' height='45' rx='10' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='38' y='14' width='24' height='18' rx='5' fill='%23f5e6b8' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='24' fill='%231a3f5c' font-weight='bold'%3EС%3C/text%3E%3C/svg%3E" alt="Сарепта" id="brandLogo" />
+                </div>
+                <h1>САРЕПТА <span>✦</span></h1>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="icon">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='25' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='10' width='30' height='20' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="масло" />
+                    </div>
+                    <span class="value" id="oilCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span style="font-size:20px;">⚡</span>
+                    <span class="value" id="clickPower">1</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ОСНОВНАЯ СЕТКА -->
+        <div class="game-grid">
+
+            <!-- ЛЕВАЯ ПАНЕЛЬ -->
+            <section class="clicker-panel">
+                <h2>Маслобойня</h2>
+                <div class="sub">собирай урожай → жми</div>
+
+                <div class="bottle-btn" id="clickBtn">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='30' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='12' width='30' height='22' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="Сарепта масло" id="bottleImg" />
+                    <div class="click-effect"></div>
+                </div>
+
+                <div class="clicker-stats">
+                    <p>За клик: <span class="highlight" id="clickPowerDisplay">1</span> 🫙</p>
+                </div>
+
+                <div class="upgrades">
+                    <button class="upgrade-btn" id="upgradeClick">
+                        <span>🔧 Улучшить клик</span>
+                        <span class="price">
+                            <span class="price-icon">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='25' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='10' width='30' height='20' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="" />
+                            </span>
+                            <span id="clickPrice">10</span>
+                        </span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ПРАВАЯ ПАНЕЛЬ -->
+            <section class="match3-panel">
+                <div class="match-header">
+                    <h3>🌾 Собери урожай</h3>
+                    <span class="hint">меняй местами</span>
+                </div>
+
+                <div class="board" id="board"></div>
+
+                <div class="match-footer">
+                    <div class="combo-info">Комбо: <span id="comboCount">0</span></div>
+                    <button class="shuffle-btn" id="shuffleBtn">⟳ Перемешать</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  КОД ИГРЫ
+        // ============================================================
+
+        // 6 разных стилей бутылок (цвета и размеры)
+        const BOTTLE_STYLES = [
+            // Золотая бутылка
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="30" width="50" height="50" rx="10" fill="#dbb063" stroke="#7a5f2e" stroke-width="3"/>
+                <rect x="35" y="12" width="30" height="22" rx="6" fill="#c9922b" stroke="#7a5f2e" stroke-width="2.5"/>
+                <circle cx="50" cy="55" r="12" fill="#f5e6b8" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
+            </svg>`,
+            // Синяя бутылка
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="30" width="50" height="50" rx="10" fill="#4a7a9c" stroke="#1a3f5c" stroke-width="3"/>
+                <rect x="35" y="12" width="30" height="22" rx="6" fill="#1a3f5c" stroke="#0b2b4a" stroke-width="2.5"/>
+                <circle cx="50" cy="55" r="12" fill="#8ab4d4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            // Зелёная бутылка
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="30" width="50" height="50" rx="10" fill="#7aab6a" stroke="#4a7a3a" stroke-width="3"/>
+                <rect x="35" y="12" width="30" height="22" rx="6" fill="#4a7a3a" stroke="#2a5a1a" stroke-width="2.5"/>
+                <circle cx="50" cy="55" r="12" fill="#b4d4a4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            // Красная бутылка
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="30" width="50" height="50" rx="10" fill="#c97a6a" stroke="#8a4a3a" stroke-width="3"/>
+                <rect x="35" y="12" width="30" height="22" rx="6" fill="#8a4a3a" stroke="#5a2a1a" stroke-width="2.5"/>
+                <circle cx="50" cy="55" r="12" fill="#e4b4a4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            // Тёмная бутылка (классическая)
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="30" width="50" height="50" rx="10" fill="#5a4a3a" stroke="#3a2a1a" stroke-width="3"/>
+                <rect x="35" y="12" width="30" height="22" rx="6" fill="#3a2a1a" stroke="#1a0a00" stroke-width="2.5"/>
+                <circle cx="50" cy="55" r="12" fill="#8a7a6a" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            // Светлая бутылка
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="30" width="50" height="50" rx="10" fill="#f5e6b8" stroke="#d4b87a" stroke-width="3"/>
+                <rect x="35" y="12" width="30" height="22" rx="6" fill="#d4b87a" stroke="#b8944c" stroke-width="2.5"/>
+                <circle cx="50" cy="55" r="12" fill="#fef7e0" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
+            </svg>`
+        ];
+
+        const BOARD_SIZE = 8;
+        let board = [];
+        let selectedRow = -1,
+            selectedCol = -1;
+
+        let oil = 50;
+        let clickPower = 1;
+        let comboCounter = 0;
+        let clickUpgradeCost = 10;
+
+        // DOM
+        const oilEl = document.getElementById('oilCount');
+        const clickPowerEl = document.getElementById('clickPower');
+        const clickPowerDisplay = document.getElementById('clickPowerDisplay');
+        const clickPriceEl = document.getElementById('clickPrice');
+        const boardEl = document.getElementById('board');
+        const comboEl = document.getElementById('comboCount');
+        const toastEl = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMessage');
+
+        // ------ ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ------
+        function getRandomBottle() {
+            return BOTTLE_STYLES[Math.floor(Math.random() * BOTTLE_STYLES.length)];
+        }
+
+        function bottleToHTML(svg) {
+            return `<img src="data:image/svg+xml;utf8,${encodeURIComponent(svg)}" alt="бутылка" />`;
+        }
+
+        // ------ UI ------
+        function updateUI() {
+            oilEl.textContent = Math.floor(oil);
+            clickPowerEl.textContent = clickPower;
+            clickPowerDisplay.textContent = clickPower;
+            clickPriceEl.textContent = clickUpgradeCost;
+            comboEl.textContent = comboCounter;
+            document.getElementById('upgradeClick').classList.toggle('disabled', oil < clickUpgradeCost);
+        }
+
+        function showToast(msg) {
+            toastMsg.textContent = msg;
+            toastEl.classList.add('show');
+            clearTimeout(toastEl._timeout);
+            toastEl._timeout = setTimeout(() => toastEl.classList.remove('show'), 1500);
+        }
+
+        // ------ ГЕНЕРАЦИЯ ПОЛЯ ------
+        function hasMatches(board) {
+            for (let r = 0; r < BOARD_SIZE; r++) {
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    const val = board[r][c];
+                    if (c < BOARD_SIZE - 2 && board[r][c + 1] === val && board[r][c + 2] === val) return true;
+                    if (r < BOARD_SIZE - 2 && board[r + 1][c] === val && board[r + 2][c] === val) return true;
+                }
+            }
+            return false;
+        }
+
+        function generateBoard() {
+            const newBoard = [];
+            for (let r = 0; r < BOARD_SIZE; r++) {
+                const row = [];
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    row.push(getRandomBottle());
+                }
+                newBoard.push(row);
+            }
+            while (hasMatches(newBoard)) {
+                for (let r = 0; r < BOARD_SIZE; r++) {
+                    for (let c = 0; c < BOARD_SIZE; c++) {
+                        if (
+                            (c < BOARD_SIZE - 2 && newBoard[r][c] === newBoard[r][c + 1] && newBoard[r][c] === newBoard[r][c +
+                                2]) ||
+                            (r < BOARD_SIZE - 2 && newBoard[r][c] === newBoard[r + 1][c] && newBoard[r][c] === newBoard[r +
+                                2][c])
+                        ) {
+                            newBoard[r][c] = getRandomBottle();
+                        }
+                    }
+                }
+            }
+            return newBoard;
+        }
+
+        // ------ ОТРИСОВКА ------
+        function renderBoard() {
+            boardEl.innerHTML = '';
+            for (let r = 0; r < BOARD_SIZE; r++) {
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.innerHTML = bottleToHTML(board[r][c]);
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
+                    if (selectedRow === r && selectedCol === c) {
+                        cell.classList.add('selected');
+                    }
+                    cell.addEventListener('click', () => onCellClick(r, c));
+                    boardEl.appendChild(cell);
+                }
+            }
+        }
+
+        // ------ ЛОГИКА ТРИ-В-РЯД ------
+        function onCellClick(row, col) {
+            if (selectedRow === -1 || selectedCol === -1) {
+                selectedRow = row;
+                selectedCol = col;
+                renderBoard();
+                return;
+            }
+
+            if (selectedRow === row && selectedCol === col) {
+                selectedRow = -1;
+                selectedCol = -1;
+                renderBoard();
+                return;
+            }
+
+            const dr = Math.abs(selectedRow - row);
+            const dc = Math.abs(selectedCol - col);
+            if ((dr === 1 && dc === 0) || (dr === 0 && dc === 1)) {
+                trySwap(selectedRow, selectedCol, row, col);
+            } else {
+                selectedRow = row;
+                selectedCol = col;
+                renderBoard();
+            }
+        }
+
+        function trySwap(r1, c1, r2, c2) {
+            const temp = board[r1][c1];
+            board[r1][c1] = board[r2][c2];
+            board[r2][c2] = temp;
+
+            const matches = findAllMatches();
+            if (matches.length > 0) {
+                selectedRow = -1;
+                selectedCol = -1;
+                processMatches(matches);
+            } else {
+                const tempBack = board[r1][c1];
+                board[r1][c1] = board[r2][c2];
+                board[r2][c2] = tempBack;
+                selectedRow = -1;
+                selectedCol = -1;
+                renderBoard();
+                showToast('❌ Нет совпадений');
+            }
+        }
+
+        function findAllMatches() {
+            const matched = new Set();
+            for (let r = 0; r < BOARD_SIZE; r++) {
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    const val = board[r][c];
+                    if (c < BOARD_SIZE - 2 && board[r][c + 1] === val && board[r][c + 2] === val) {
+                        let end = c + 2;
+                        while (end + 1 < BOARD_SIZE && board[r][end + 1] === val) end++;
+                        for (let k = c; k <= end; k++) matched.add(r + ',' + k);
+                    }
+                    if (r < BOARD_SIZE - 2 && board[r + 1][c] === val && board[r + 2][c] === val) {
+                        let end = r + 2;
+                        while (end + 1 < BOARD_SIZE && board[end + 1][c] === val) end++;
+                        for (let k = r; k <= end; k++) matched.add(k + ',' + c);
+                    }
+                }
+            }
+            return Array.from(matched).map(s => {
+                const [r, c] = s.split(',').map(Number);
+                return { row: r, col: c };
+            });
+        }
+
+        function processMatches(matches) {
+            if (matches.length === 0) {
+                const newMatches = findAllMatches();
+                if (newMatches.length > 0) {
+                    processMatches(newMatches);
+                } else {
+                    renderBoard();
+                    updateUI();
+                }
+                return;
+            }
+
+            const bonus = matches.length * 2;
+            oil += bonus;
+            comboCounter += matches.length;
+            showToast(`✨ +${bonus} 🫙 за урожай!`);
+
+            const cells = document.querySelectorAll('.cell');
+            matches.forEach(({ row, col }) => {
+                const idx = row * BOARD_SIZE + col;
+                if (cells[idx]) cells[idx].classList.add('removing');
+            });
+
+            matches.forEach(({ row, col }) => {
+                board[row][col] = null;
+            });
+
+            setTimeout(() => {
+                for (let c = 0; c < BOARD_SIZE; c++) {
+                    let writeRow = BOARD_SIZE - 1;
+                    for (let r = BOARD_SIZE - 1; r >= 0; r--) {
+                        if (board[r][c] !== null) {
+                            board[writeRow][c] = board[r][c];
+                            if (writeRow !== r) board[r][c] = null;
+                            writeRow--;
+                        }
+                    }
+                    for (let r = writeRow; r >= 0; r--) {
+                        board[r][c] = getRandomBottle();
+                    }
+                }
+
+                renderBoard();
+                document.querySelectorAll('.cell').forEach(el => el.classList.add('falling'));
+
+                const nextMatches = findAllMatches();
+                if (nextMatches.length > 0) {
+                    setTimeout(() => processMatches(nextMatches), 250);
+                } else {
+                    setTimeout(() => {
+                        renderBoard();
+                        updateUI();
+                    }, 250);
+                }
+            }, 250);
+        }
+
+        function shuffleBoard() {
+            board = generateBoard();
+            selectedRow = -1;
+            selectedCol = -1;
+            renderBoard();
+            showToast('🔄 Поле перемешано');
+        }
+
+        // ------ КЛИКЕР ------
+        function handleClick() {
+            oil += clickPower;
+            const btn = document.getElementById('clickBtn');
+            btn.style.transform = 'scale(0.90)';
+            setTimeout(() => btn.style.transform = '', 80);
+            updateUI();
+        }
+
+        function buyClickUpgrade() {
+            if (oil < clickUpgradeCost) return;
+            oil -= clickUpgradeCost;
+            clickPower += 1;
+            clickUpgradeCost = Math.floor(clickUpgradeCost * 1.8) + 2;
+            updateUI();
+            showToast('🔧 Клик +1');
+        }
+
+        // ============================================================
+        //  ИНИЦИАЛИЗАЦИЯ
+        // ============================================================
+
+        function init() {
+            board = generateBoard();
+            renderBoard();
+            updateUI();
+
+            document.getElementById('clickBtn').addEventListener('click', handleClick);
+            document.getElementById('upgradeClick').addEventListener('click', buyClickUpgrade);
+            document.getElementById('shuffleBtn').addEventListener('click', shuffleBoard);
+
+            // Для замены на вашу картинку (раскомментируйте):
+            // const logo = document.getElementById('brandLogo');
+            // logo.src = 'assets/sarepta.png';
+            // const bottle = document.getElementById('bottleImg');
+            // bottle.src = 'assets/sarepta.png';
+            // document.querySelectorAll('.icon img, .price-icon img, .toast-icon img').forEach(el => {
+            //     el.src = 'assets/sarepta.png';
+            // });
+        }
+
+        init();
+    </script>
+
+</body>
+</html>
