@@ -73,9 +73,46 @@
             font-weight: 700;
             color: #1a3f5c;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .logo-area h1 span {
             color: #c9922b;
+        }
+
+        .achievements-toggle {
+            background: #c9922b;
+            border: none;
+            border-radius: 40px;
+            padding: 4px 16px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #1a1a1a;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #7a5f2e;
+            transition: 0.08s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .achievements-toggle:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #7a5f2e;
+        }
+
+        .achievements-toggle .badge {
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
         }
 
         .stats {
@@ -238,7 +275,7 @@
             font-size: 16px;
         }
 
-        /* ===== УЛУЧШЕНИЯ В ЛЕВОЙ ПАНЕЛИ ===== */
+        /* ===== УЛУЧШЕНИЯ ===== */
         .upgrades-container {
             width: 100%;
             display: flex;
@@ -330,7 +367,6 @@
             filter: grayscale(0.5);
         }
 
-        /* ===== АНИМАЦИЯ ДЛЯ КНОПОК УЛУЧШЕНИЙ ===== */
         .upgrade-btn .upgrade-flash {
             position: absolute;
             top: 0;
@@ -348,22 +384,22 @@
         }
 
         @keyframes flashPulse {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            30% {
-                opacity: 1;
-                transform: scale(1.1);
-            }
-            70% {
-                opacity: 0.5;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
+            0% { opacity: 0; transform: scale(0.8); }
+            30% { opacity: 1; transform: scale(1.1); }
+            70% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.9); }
+        }
+
+        .upgrade-btn.upgrading {
+            animation: upgradePulse 0.5s ease;
+        }
+
+        @keyframes upgradePulse {
+            0% { transform: scale(1); background: #1a3f5c; }
+            25% { transform: scale(1.04); background: #c9922b; color: #1a1a1a; }
+            50% { transform: scale(0.97); background: #235a80; color: #fef7e0; }
+            75% { transform: scale(1.02); background: #1a3f5c; }
+            100% { transform: scale(1); background: #1a3f5c; }
         }
 
         /* ===== БУТЫЛОЧНЫЕ ЛИНЕЙКИ ===== */
@@ -426,13 +462,20 @@
             margin-bottom: 2px;
         }
 
-        .bottle-item .buy-btn {
+        .bottle-item .bottle-actions {
+            display: flex;
+            gap: 3px;
+            width: 100%;
+        }
+
+        .bottle-item .bottle-actions .buy-btn,
+        .bottle-item .bottle-actions .upgrade-bottle-btn {
             background: #1a3f5c;
             border: none;
             border-radius: 40px;
             padding: 3px 10px;
             color: #fef7e0;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.15s;
@@ -440,28 +483,43 @@
             display: flex;
             align-items: center;
             gap: 3px;
-            width: 100%;
             justify-content: center;
+            flex: 1;
             position: relative;
             overflow: hidden;
         }
 
-        .bottle-item .buy-btn:hover {
+        .bottle-item .bottle-actions .buy-btn:hover,
+        .bottle-item .bottle-actions .upgrade-bottle-btn:hover {
             background: #235a80;
         }
-        .bottle-item .buy-btn:active {
+        .bottle-item .bottle-actions .buy-btn:active,
+        .bottle-item .bottle-actions .upgrade-bottle-btn:active {
             transform: translateY(3px);
             box-shadow: 0 0px 0 #0b2b4a;
         }
-        .bottle-item .buy-btn.disabled {
+
+        .bottle-item .bottle-actions .buy-btn.disabled,
+        .bottle-item .bottle-actions .upgrade-bottle-btn.disabled {
             opacity: 0.4;
             pointer-events: none;
             filter: grayscale(0.5);
         }
 
-        .bottle-item .buy-btn .price-icon {
-            width: 14px;
-            height: 14px;
+        .bottle-item .bottle-actions .upgrade-bottle-btn {
+            background: #4a7a3a;
+            box-shadow: 0 3px 0 #2a5a2a;
+            font-size: 8px;
+        }
+
+        .bottle-item .bottle-actions .upgrade-bottle-btn:hover {
+            background: #5a8a4a;
+        }
+
+        .bottle-item .bottle-actions .buy-btn .price-icon,
+        .bottle-item .bottle-actions .upgrade-bottle-btn .price-icon {
+            width: 12px;
+            height: 12px;
             border-radius: 3px;
             overflow: hidden;
             display: inline-flex;
@@ -469,7 +527,8 @@
             justify-content: center;
             background: #b8944c;
         }
-        .bottle-item .buy-btn .price-icon img {
+        .bottle-item .bottle-actions .buy-btn .price-icon img,
+        .bottle-item .bottle-actions .upgrade-bottle-btn .price-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -484,95 +543,66 @@
             color: #2a5a3a;
         }
 
-        .bottle-item .owned-badge {
-            font-size: 8px;
-            color: #4a7a3a;
-            font-weight: 600;
-        }
-
-        /* ===== АНИМАЦИЯ ПОКУПКИ БУТЫЛКИ ===== */
         .bottle-item.purchasing {
             animation: purchasePop 0.6s ease forwards;
         }
 
+        .bottle-item.upgrading-bottle {
+            animation: upgradeBottlePop 0.5s ease forwards;
+        }
+
         @keyframes purchasePop {
-            0% {
-                transform: scale(1);
-                background: rgba(255, 215, 0, 0.3);
-            }
-            30% {
-                transform: scale(1.08);
-                background: rgba(255, 215, 0, 0.5);
-                border-color: #c9922b;
-            }
-            60% {
-                transform: scale(0.95);
-                background: rgba(42, 90, 58, 0.2);
-            }
-            100% {
-                transform: scale(1);
-                background: rgba(42, 90, 58, 0.15);
-                border-color: #4a7a3a;
-            }
+            0% { transform: scale(1); background: rgba(255, 215, 0, 0.3); }
+            30% { transform: scale(1.08); background: rgba(255, 215, 0, 0.5); border-color: #c9922b; }
+            60% { transform: scale(0.95); background: rgba(42, 90, 58, 0.2); }
+            100% { transform: scale(1); background: rgba(42, 90, 58, 0.15); border-color: #4a7a3a; }
         }
 
-        .bottle-item .purchase-particles {
+        @keyframes upgradeBottlePop {
+            0% { transform: scale(1); background: rgba(74, 122, 58, 0.2); }
+            30% { transform: scale(1.06); background: rgba(74, 122, 58, 0.4); border-color: #7aab6a; }
+            60% { transform: scale(0.95); background: rgba(42, 90, 58, 0.15); }
+            100% { transform: scale(1); background: rgba(42, 90, 58, 0.15); border-color: #4a7a3a; }
+        }
+
+        .bottle-item .particle-container {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            overflow: hidden;
         }
 
-        .bottle-item .purchase-particles .particle {
+        .bottle-item .particle-container .particle {
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
-            background: #c9922b;
+            pointer-events: none;
             animation: particleFly 0.8s ease-out forwards;
         }
 
         @keyframes particleFly {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(0);
-            }
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
         }
 
-        /* ===== АНИМАЦИЯ ПРОКАЧКИ (для активных улучшений) ===== */
-        .upgrade-btn.upgrading {
-            animation: upgradePulse 0.5s ease;
+        .float-text {
+            position: fixed;
+            pointer-events: none;
+            font-size: 22px;
+            font-weight: 900;
+            color: #c9922b;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(201, 146, 43, 0.3);
+            z-index: 1000;
+            animation: floatUp 1s ease-out forwards;
         }
 
-        @keyframes upgradePulse {
-            0% {
-                transform: scale(1);
-                background: #1a3f5c;
-            }
-            25% {
-                transform: scale(1.04);
-                background: #c9922b;
-                color: #1a1a1a;
-            }
-            50% {
-                transform: scale(0.97);
-                background: #235a80;
-                color: #fef7e0;
-            }
-            75% {
-                transform: scale(1.02);
-                background: #1a3f5c;
-            }
-            100% {
-                transform: scale(1);
-                background: #1a3f5c;
-            }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.3); }
         }
 
         /* ===== ПРАВАЯ ПАНЕЛЬ ===== */
@@ -637,6 +667,7 @@
             aspect-ratio: 1/1;
             padding: 6%;
             overflow: hidden;
+            position: relative;
         }
 
         .cell img {
@@ -659,31 +690,27 @@
             animation: pop 0.2s ease forwards;
         }
         @keyframes pop {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.3);
-                opacity: 0.6;
-            }
-            100% {
-                transform: scale(0);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+            100% { transform: scale(0); opacity: 0; }
         }
         .cell.falling {
             animation: fall 0.25s ease;
         }
         @keyframes fall {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0.2;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0% { transform: translateY(-50px); opacity: 0.2; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .cell.bonus {
+            animation: bonusGlow 0.6s ease;
+        }
+
+        @keyframes bonusGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+            30% { box-shadow: 0 0 30px 10px rgba(255, 215, 0, 0.6); }
+            70% { box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.3); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
         }
 
         .match-footer {
@@ -718,6 +745,216 @@
         .shuffle-btn:active {
             transform: translateY(4px);
             box-shadow: 0 0px 0 #7a5f2e;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ДОСТИЖЕНИЙ ===== */
+        .achievements-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .achievements-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .achievements-modal {
+            background: linear-gradient(145deg, #fef7e0, #f5e6b8);
+            border-radius: 32px;
+            padding: 30px 35px 35px;
+            max-width: 650px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #d4b87a;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .achievements-modal::-webkit-scrollbar {
+            width: 4px;
+        }
+        .achievements-modal::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+        .achievements-modal::-webkit-scrollbar-thumb {
+            background: #c9922b;
+            border-radius: 10px;
+        }
+
+        .achievements-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px dashed #b8944c;
+        }
+
+        .achievements-modal .modal-header h2 {
+            font-size: 22px;
+            color: #1a3f5c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .achievements-modal .modal-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #1a3f5c;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .achievements-modal .modal-header .close-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+            transform: rotate(90deg);
+        }
+
+        .achievement-section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a3f5c;
+            margin: 14px 0 10px 0;
+            padding: 4px 12px;
+            background: rgba(201, 146, 43, 0.12);
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .achievement-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border: 1px solid #dcc18a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s;
+        }
+
+        .achievement-item.unlocked {
+            background: rgba(42, 90, 58, 0.12);
+            border-color: #4a7a3a;
+        }
+
+        .achievement-item.locked {
+            opacity: 0.6;
+            filter: grayscale(0.3);
+        }
+
+        .achievement-item .ach-icon {
+            font-size: 28px;
+            width: 44px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .achievement-item .ach-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .achievement-item .ach-info .ach-name {
+            font-weight: 700;
+            color: #1a3f5c;
+            font-size: 14px;
+        }
+
+        .achievement-item .ach-info .ach-desc {
+            font-size: 11px;
+            color: #7a643a;
+            margin-top: 1px;
+        }
+
+        .achievement-item .ach-status {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 40px;
+            flex-shrink: 0;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .achievement-item.unlocked .ach-status {
+            background: #4a7a3a;
+            color: white;
+        }
+
+        .achievement-item.locked .ach-status {
+            background: #7a643a;
+            color: white;
+        }
+
+        .achievement-item .ach-progress {
+            width: 100%;
+            height: 3px;
+            background: #dcc18a;
+            border-radius: 4px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .achievement-item .ach-progress .ach-progress-bar {
+            height: 100%;
+            background: #c9922b;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .achievement-item.unlocked .ach-progress .ach-progress-bar {
+            background: #4a7a3a;
+        }
+
+        .achievement-item .ach-badge-session {
+            font-size: 9px;
+            background: rgba(201, 146, 43, 0.2);
+            padding: 1px 8px;
+            border-radius: 40px;
+            color: #7a643a;
+            margin-top: 2px;
+            display: inline-block;
+        }
+
+        .achievement-item .ach-first-unlock {
+            font-size: 9px;
+            background: rgba(255, 215, 0, 0.25);
+            padding: 1px 8px;
+            border-radius: 40px;
+            color: #c9922b;
+            margin-top: 2px;
+            display: inline-block;
+            margin-left: 6px;
         }
 
         /* ===== ТОСТ ===== */
@@ -760,35 +997,21 @@
         .toast.show {
             opacity: 1;
         }
-
-        /* ===== FLOATING TEXT (для +N над кнопками) ===== */
-        .float-text {
-            position: fixed;
-            pointer-events: none;
-            font-size: 22px;
-            font-weight: 900;
-            color: #c9922b;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(201, 146, 43, 0.3);
-            z-index: 1000;
-            animation: floatUp 1s ease-out forwards;
+        .toast.achievement-unlock {
+            border-color: #ffd700;
+            background: #2a5a3a;
+            animation: toastAchievement 0.5s ease;
         }
 
-        @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-80px) scale(1.3);
-            }
+        @keyframes toastAchievement {
+            0% { transform: translateX(-50%) scale(0.8); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
         }
 
         /* ===== АДАПТИВ ===== */
         @media (max-width: 820px) {
-            .game-grid {
-                grid-template-columns: 1fr;
-            }
+            .game-grid { grid-template-columns: 1fr; }
             .clicker-panel {
                 max-height: none;
                 flex-direction: row;
@@ -797,105 +1020,41 @@
                 gap: 6px;
                 padding: 12px;
             }
-            .bottle-btn {
-                width: 70px;
-                height: 70px;
-                padding: 7px;
-                margin-bottom: 0;
-            }
-            .clicker-stats {
-                display: flex;
-                gap: 6px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .clicker-stats p {
-                margin: 0;
-                font-size: 12px;
-                padding: 2px 8px;
-            }
-            .upgrades-container {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .upgrade-btn {
-                width: auto;
-                min-width: 130px;
-                flex: 1 1 auto;
-                font-size: 11px;
-                padding: 5px 10px;
-            }
-            .upgrade-section-title {
-                width: 100%;
-                font-size: 10px;
-                margin: 2px 0;
-            }
-            .bottle-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .stats {
-                gap: 12px;
-                padding: 5px 12px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .stat-item {
-                font-size: 14px;
-            }
-            .board {
-                gap: 3px;
-                padding: 4px;
-            }
-            .cell {
-                border-radius: 5px;
-                padding: 5%;
-            }
+            .bottle-btn { width: 70px; height: 70px; padding: 7px; margin-bottom: 0; }
+            .clicker-stats { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+            .clicker-stats p { margin: 0; font-size: 12px; padding: 2px 8px; }
+            .upgrades-container { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+            .upgrade-btn { width: auto; min-width: 130px; flex: 1 1 auto; font-size: 11px; padding: 5px 10px; }
+            .upgrade-section-title { width: 100%; font-size: 10px; margin: 2px 0; }
+            .bottle-grid { grid-template-columns: repeat(3, 1fr); }
+            .stats { gap: 12px; padding: 5px 12px; flex-wrap: wrap; justify-content: center; }
+            .stat-item { font-size: 14px; }
+            .board { gap: 3px; padding: 4px; }
+            .cell { border-radius: 5px; padding: 5%; }
+            .bottle-item .bottle-actions { flex-direction: column; gap: 2px; }
+            .bottle-item .bottle-actions .buy-btn,
+            .bottle-item .bottle-actions .upgrade-bottle-btn { font-size: 8px; padding: 2px 6px; }
+            .achievements-modal { padding: 20px; max-width: 95%; }
+            .achievement-item { padding: 10px 12px; flex-wrap: wrap; }
+            .achievement-item .ach-icon { font-size: 22px; width: 36px; }
         }
 
         @media (max-width: 480px) {
-            .game-wrapper {
-                padding: 12px;
-            }
-            .logo-area h1 {
-                font-size: 18px;
-            }
-            .board {
-                gap: 2px;
-                padding: 3px;
-            }
-            .cell {
-                border-radius: 4px;
-                padding: 4%;
-            }
-            .bottle-btn {
-                width: 60px;
-                height: 60px;
-                padding: 5px;
-            }
-            .header {
-                gap: 6px;
-            }
-            .stats .stat-item .value {
-                min-width: 25px;
-                padding: 0 6px;
-                font-size: 13px;
-            }
-            .upgrade-btn {
-                min-width: 100px;
-                font-size: 10px;
-                padding: 4px 8px;
-            }
-            .bottle-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .bottle-item .bottle-icon {
-                width: 26px;
-                height: 26px;
-            }
-            .bottle-item .bottle-name {
-                font-size: 8px;
-            }
+            .game-wrapper { padding: 12px; }
+            .logo-area h1 { font-size: 18px; }
+            .board { gap: 2px; padding: 3px; }
+            .cell { border-radius: 4px; padding: 4%; }
+            .bottle-btn { width: 60px; height: 60px; padding: 5px; }
+            .header { gap: 6px; }
+            .stats .stat-item .value { min-width: 25px; padding: 0 6px; font-size: 13px; }
+            .upgrade-btn { min-width: 100px; font-size: 10px; padding: 4px 8px; }
+            .bottle-grid { grid-template-columns: repeat(2, 1fr); }
+            .bottle-item .bottle-icon { width: 26px; height: 26px; }
+            .bottle-item .bottle-name { font-size: 8px; }
+            .achievements-modal { padding: 14px; }
+            .achievement-item { padding: 8px 10px; gap: 10px; }
+            .achievement-item .ach-icon { font-size: 18px; width: 30px; }
+            .achievement-item .ach-info .ach-name { font-size: 12px; }
         }
     </style>
 </head>
@@ -909,6 +1068,17 @@
         <span id="toastMessage">✨ +10 бутылок!</span>
     </div>
 
+    <!-- ===== МОДАЛЬНОЕ ОКНО ДОСТИЖЕНИЙ ===== -->
+    <div class="achievements-overlay" id="achievementsOverlay">
+        <div class="achievements-modal">
+            <div class="modal-header">
+                <h2>🏆 Достижения</h2>
+                <button class="close-btn" id="closeAchievements">✕</button>
+            </div>
+            <div id="achievementsList"></div>
+        </div>
+    </div>
+
     <!-- ===== ОБЁРТКА ===== -->
     <div class="game-wrapper">
 
@@ -918,7 +1088,13 @@
                 <div class="logo-placeholder">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23c9922b' rx='12'/%3E%3Crect x='25' y='30' width='50' height='45' rx='10' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='38' y='14' width='24' height='18' rx='5' fill='%23f5e6b8' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='24' fill='%231a3f5c' font-weight='bold'%3EС%3C/text%3E%3C/svg%3E" alt="Сарепта" id="brandLogo" />
                 </div>
-                <h1>САРЕПТА <span>✦</span></h1>
+                <h1>
+                    САРЕПТА <span>✦</span>
+                    <button class="achievements-toggle" id="achievementsToggle">
+                        🏆
+                        <span class="badge" id="achBadge">0</span>
+                    </button>
+                </h1>
             </div>
             <div class="stats">
                 <div class="stat-item">
@@ -1051,12 +1227,84 @@
         ];
 
         const BOTTLE_LINES_CONFIG = [
-            { id: 'gold', name: 'Золотая', baseIncome: 0.5, baseCost: 200, iconIndex: 0 },
-            { id: 'blue', name: 'Синяя', baseIncome: 1.0, baseCost: 350, iconIndex: 1 },
-            { id: 'green', name: 'Зелёная', baseIncome: 1.8, baseCost: 550, iconIndex: 2 },
-            { id: 'red', name: 'Красная', baseIncome: 3.0, baseCost: 800, iconIndex: 3 },
-            { id: 'dark', name: 'Тёмная', baseIncome: 5.0, baseCost: 1200, iconIndex: 4 },
-            { id: 'light', name: 'Светлая', baseIncome: 8.0, baseCost: 1800, iconIndex: 5 }
+            { id: 'gold', name: 'Золотая', baseIncome: 0.5, baseCost: 200, upgradeCost: 150, iconIndex: 0 },
+            { id: 'blue', name: 'Синяя', baseIncome: 1.0, baseCost: 350, upgradeCost: 250, iconIndex: 1 },
+            { id: 'green', name: 'Зелёная', baseIncome: 1.8, baseCost: 550, upgradeCost: 400, iconIndex: 2 },
+            { id: 'red', name: 'Красная', baseIncome: 3.0, baseCost: 800, upgradeCost: 600, iconIndex: 3 },
+            { id: 'dark', name: 'Тёмная', baseIncome: 5.0, baseCost: 1200, upgradeCost: 900, iconIndex: 4 },
+            { id: 'light', name: 'Светлая', baseIncome: 8.0, baseCost: 1800, upgradeCost: 1300, iconIndex: 5 }
+        ];
+
+        // ===== ДОСТИЖЕНИЯ =====
+        // Все достижения становятся вечными при первом разблокировании!
+        // session: true означает, что достижение показывается только в текущей сессии,
+        // но при первом разблокировании оно сохраняется навсегда
+        const ACHIEVEMENTS = [
+            // Базовые достижения (всегда вечные)
+            { id: 'first_combo', name: 'Первый урожай', desc: 'Собери первую комбинацию', icon: '🌱',
+                check: (s) => s.totalCombos >= 1 },
+            { id: 'combo_10', name: 'Сборщик урожая', desc: 'Собери 10 комбинаций', icon: '🌾',
+                check: (s) => s.totalCombos >= 10 },
+            { id: 'combo_50', name: 'Опытный фермер', desc: 'Собери 50 комбинаций', icon: '🚜',
+                check: (s) => s.totalCombos >= 50 },
+            { id: 'combo_100', name: 'Мастер урожая', desc: 'Собери 100 комбинаций', icon: '🏅',
+                check: (s) => s.totalCombos >= 100 },
+            { id: 'combo_500', name: 'Легенда полей', desc: 'Собери 500 комбинаций', icon: '👑',
+                check: (s) => s.totalCombos >= 500 },
+            { id: 'combo_1000', name: 'Император урожая', desc: 'Собери 1000 комбинаций', icon: '👑',
+                check: (s) => s.totalCombos >= 1000 },
+            { id: 'combo_5000', name: 'Повелитель полей', desc: 'Собери 5000 комбинаций', icon: '👑',
+                check: (s) => s.totalCombos >= 5000 },
+            { id: 'combo_10000', name: 'Бог урожая', desc: 'Собери 10000 комбинаций', icon: '👑',
+                check: (s) => s.totalCombos >= 10000 },
+            { id: 'combo_15000', name: 'Абсолютный урожай', desc: 'Собери 15000 комбинаций', icon: '👑',
+                check: (s) => s.totalCombos >= 15000 },
+            { id: 'oil_1000', name: 'Богатый урожай', desc: 'Накопи 1000 🫙', icon: '💰', check: (s) => s.totalOil >=
+                1000 },
+            { id: 'oil_10000', name: 'Магнат масла', desc: 'Накопи 10000 🫙', icon: '💎', check: (s) => s.totalOil >=
+                10000 },
+            { id: 'oil_100000', name: 'Нефтяной барон', desc: 'Накопи 100000 🫙', icon: '💎', check: (s) => s
+                    .totalOil >= 100000 },
+            { id: 'click_10', name: 'Сила клика', desc: 'Улучши клик до 10 уровня', icon: '⚡', check: (s) => s
+                    .clickLevel >= 10 },
+            { id: 'click_25', name: 'Мастер клика', desc: 'Улучши клик до 25 уровня', icon: '🔥', check: (s) => s
+                    .clickLevel >= 25 },
+            { id: 'click_50', name: 'Легенда клика', desc: 'Улучши клик до 50 уровня', icon: '🔥', check: (s) => s
+                    .clickLevel >= 50 },
+            { id: 'passive_10', name: 'Пассивный доход', desc: 'Улучши пассивный доход до 10 уровня', icon: '🏭',
+                check: (s) => s.passiveLevel >= 10 },
+            { id: 'passive_25', name: 'Мастер пассива', desc: 'Улучши пассивный доход до 25 уровня', icon: '🏭',
+                check: (s) => s.passiveLevel >= 25 },
+            { id: 'bottle_1', name: 'Первая линейка', desc: 'Купи первую линейку бутылок', icon: '🫙',
+                check: (s) => s.bottlesBought >= 1 },
+            { id: 'bottle_3', name: 'Коллекционер', desc: 'Купи 3 линейки бутылок', icon: '📦', check: (s) => s
+                    .bottlesBought >= 3 },
+            { id: 'bottle_6', name: 'Полная коллекция', desc: 'Купи все 6 линеек бутылок', icon: '🏛️',
+                check: (s) => s.bottlesBought >= 6 },
+            { id: 'bottle_upgrade_5', name: 'Мастер прокачки', desc: 'Прокачай любую линейку до 5 уровня', icon: '⬆️',
+                check: (s) => s.maxBottleLevel >= 5 },
+            { id: 'bottle_upgrade_10', name: 'Гуру прокачки', desc: 'Прокачай любую линейку до 10 уровня', icon: '⬆️',
+                check: (s) => s.maxBottleLevel >= 10 },
+            { id: 'bonus_combo', name: 'Бонусная комбинация', desc: 'Собери комбинацию из 4+ элементов', icon: '⭐',
+                check: (s) => s.bonusCombos >= 1 },
+
+            // Сессионные достижения (становятся вечными при первом разблокировании)
+            { id: 'session_combo_25', name: 'Быстрый старт', desc: 'Собери 25 комбинаций за одну игру', icon: '⚡',
+                session: true, check: (s) => s.sessionCombos >= 25 },
+            { id: 'session_combo_100', name: 'Ударный темп', desc: 'Собери 100 комбинаций за одну игру', icon: '🔥',
+                session: true, check: (s) => s.sessionCombos >= 100 },
+            { id: 'session_combo_500', name: 'Марафонец', desc: 'Собери 500 комбинаций за одну игру', icon: '🏃',
+                session: true, check: (s) => s.sessionCombos >= 500 },
+            { id: 'session_oil_5000', name: 'Богатство за сессию', desc: 'Накопи 5000 🫙 за одну игру', icon: '💰',
+                session: true, check: (s) => s.sessionOil >= 5000 },
+            { id: 'session_oil_50000', name: 'Капитал сессии', desc: 'Накопи 50000 🫙 за одну игру', icon: '💎',
+                session: true, check: (s) => s.sessionOil >= 50000 },
+            { id: 'session_click_5', name: 'Скоростной клик', desc: 'Улучши клик до 5 уровня за одну игру', icon: '⚡',
+                session: true, check: (s) => s.sessionClickLevel >= 5 },
+            { id: 'session_passive_5', name: 'Пассивная мощь', desc: 'Улучши пассивный доход до 5 уровня за одну игру',
+                icon: '🏭', session: true, check: (s) => s.sessionPassiveLevel >= 5 },
+            { id: 'session_bottles_3', name: 'Коллекционер за сессию', desc: 'Купи 3 линейки за одну игру', icon: '📦',
+                session: true, check: (s) => s.sessionBottlesBought >= 3 },
         ];
 
         const BOARD_SIZE = 8;
@@ -1075,6 +1323,47 @@
         let passiveUpgradeCost = 25;
         let bottleLines = [];
 
+        // ===== СТАТИСТИКА ДЛЯ ДОСТИЖЕНИЙ =====
+        let stats = {
+            totalCombos: 0,
+            totalOil: 0,
+            clickLevel: 0,
+            passiveLevel: 0,
+            bottlesBought: 0,
+            maxBottleLevel: 0,
+            bonusCombos: 0,
+            // Сессионная статистика (обнуляется при загрузке)
+            sessionCombos: 0,
+            sessionOil: 0,
+            sessionClickLevel: 0,
+            sessionPassiveLevel: 0,
+            sessionBottlesBought: 0
+        };
+
+        // ===== СОСТОЯНИЕ ДОСТИЖЕНИЙ =====
+        // Все разблокированные достижения сохраняются здесь навсегда
+        let unlockedAchievements = {};
+
+        // ===== ЗАГРУЗКА СОХРАНЕНИЙ =====
+        function loadAchievements() {
+            try {
+                const saved = localStorage.getItem('sarepta_achievements');
+                if (saved) {
+                    unlockedAchievements = JSON.parse(saved);
+                }
+            } catch (e) {
+                console.warn('Не удалось загрузить достижения');
+            }
+        }
+
+        function saveAchievements() {
+            try {
+                localStorage.setItem('sarepta_achievements', JSON.stringify(unlockedAchievements));
+            } catch (e) {
+                console.warn('Не удалось сохранить достижения');
+            }
+        }
+
         // ===== DOM =====
         const oilEl = document.getElementById('oilCount');
         const clickPowerEl = document.getElementById('clickPower');
@@ -1092,6 +1381,9 @@
         const bottleGridEl = document.getElementById('bottleGrid');
         const clickFlash = document.getElementById('clickFlash');
         const passiveFlash = document.getElementById('passiveFlash');
+        const achievementsOverlay = document.getElementById('achievementsOverlay');
+        const achievementsList = document.getElementById('achievementsList');
+        const achBadge = document.getElementById('achBadge');
 
         // ===== ВСПОМОГАТЕЛЬНЫЕ =====
         function getRandomBottle() {
@@ -1108,7 +1400,7 @@
             return total;
         }
 
-        // ===== FLOATING TEXT (эффект +N) =====
+        // ===== FLOATING TEXT =====
         function showFloatText(x, y, text, color = '#c9922b') {
             const el = document.createElement('div');
             el.className = 'float-text';
@@ -1118,6 +1410,118 @@
             el.style.color = color;
             document.body.appendChild(el);
             setTimeout(() => el.remove(), 1000);
+        }
+
+        // ===== ПАРТИКЛЫ =====
+        function spawnParticles(element, count = 12, colors = ['#c9922b', '#dbb063', '#f5e6b8', '#ffd700']) {
+            const container = document.createElement('div');
+            container.className = 'particle-container';
+            const rect = element.getBoundingClientRect();
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const angle = (i / count) * Math.PI * 2 + Math.random() * 0.2;
+                const dist = 30 + Math.random() * 40;
+                particle.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+                particle.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+                particle.style.left = cx + 'px';
+                particle.style.top = cy + 'px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = (i * 0.03) + 's';
+                container.appendChild(particle);
+            }
+            element.appendChild(container);
+            setTimeout(() => container.remove(), 1000);
+        }
+
+        // ===== ДОСТИЖЕНИЯ =====
+        function checkAchievements() {
+            let newUnlock = false;
+
+            ACHIEVEMENTS.forEach(ach => {
+                const isUnlocked = !!unlockedAchievements[ach.id];
+
+                if (!isUnlocked && ach.check(stats)) {
+                    // Разблокируем достижение — оно становится вечным навсегда!
+                    unlockedAchievements[ach.id] = true;
+                    saveAchievements();
+                    newUnlock = true;
+                    showAchievementToast(ach);
+                }
+            });
+
+            if (newUnlock) {
+                updateAchievementBadge();
+            }
+        }
+
+        function showAchievementToast(ach) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMessage');
+            toast.classList.remove('achievement-unlock');
+            const isSession = ach.session || false;
+            const typeLabel = isSession ? '⚡' : '🌟';
+            const firstTime = isSession ? ' (Впервые! 🌟)' : '';
+            msg.textContent = `${typeLabel} ${ach.icon} ${ach.name}!${firstTime}`;
+            toast.classList.add('achievement-unlock');
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+                toast.classList.remove('achievement-unlock');
+            }, 3500);
+        }
+
+        function updateAchievementBadge() {
+            const count = Object.keys(unlockedAchievements).length;
+            achBadge.textContent = count;
+            achBadge.style.display = count > 0 ? 'flex' : 'none';
+        }
+
+        function renderAchievements() {
+            achievementsList.innerHTML = '';
+
+            // Все достижения (без разделения — все вечные)
+            const section = document.createElement('div');
+            section.innerHTML = '<div class="achievement-section-title">🌟 Все достижения (сохраняются навсегда)</div>';
+            achievementsList.appendChild(section);
+
+            ACHIEVEMENTS.forEach(ach => {
+                const isUnlocked = !!unlockedAchievements[ach.id];
+                const item = createAchievementItem(ach, isUnlocked);
+                achievementsList.appendChild(item);
+            });
+
+            updateAchievementBadge();
+        }
+
+        function createAchievementItem(ach, isUnlocked) {
+            const item = document.createElement('div');
+            item.className = `achievement-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+
+            const isSession = ach.session || false;
+            const typeLabel = isSession ? '⚡ За эту игру' : '🌟 Вечное';
+
+            item.innerHTML = `
+                <div class="ach-icon">${ach.icon}</div>
+                <div class="ach-info">
+                    <div class="ach-name">${ach.name}</div>
+                    <div class="ach-desc">${ach.desc}</div>
+                    <div>
+                        <span class="ach-badge-session">${typeLabel}</span>
+                        ${isUnlocked ? '<span class="ach-first-unlock">✅ Сохранено навсегда</span>' : ''}
+                    </div>
+                    <div class="ach-progress">
+                        <div class="ach-progress-bar" style="width:${isUnlocked ? 100 : 0}%"></div>
+                    </div>
+                </div>
+                <div class="ach-status">${isUnlocked ? '✅ Разблокировано' : '🔒 Заблокировано'}</div>
+            `;
+
+            return item;
         }
 
         // ===== UI =====
@@ -1140,11 +1544,19 @@
             renderBottleGrid();
         }
 
-        function showToast(msg) {
+        function showToast(msg, isAchievement = false) {
             toastMsg.textContent = msg;
             toastEl.classList.add('show');
+            if (isAchievement) {
+                toastEl.classList.add('achievement-unlock');
+            } else {
+                toastEl.classList.remove('achievement-unlock');
+            }
             clearTimeout(toastEl._timeout);
-            toastEl._timeout = setTimeout(() => toastEl.classList.remove('show'), 1500);
+            toastEl._timeout = setTimeout(() => {
+                toastEl.classList.remove('show');
+                toastEl.classList.remove('achievement-unlock');
+            }, isAchievement ? 3500 : 1500);
         }
 
         // ===== БУТЫЛОЧНЫЕ ЛИНЕЙКИ =====
@@ -1184,32 +1596,44 @@
                     level.textContent = 'Доступна';
                 }
 
-                const btn = document.createElement('button');
-                btn.className = 'buy-btn';
+                const actions = document.createElement('div');
+                actions.className = 'bottle-actions';
 
                 if (isOwned) {
-                    btn.textContent = '✅ Куплена';
-                    btn.style.background = '#4a7a3a';
-                    btn.style.boxShadow = '0 3px 0 #2a5a2a';
-                    btn.disabled = true;
+                    const upgradeBtn = document.createElement('button');
+                    upgradeBtn.className = 'upgrade-bottle-btn';
+                    const upgradeCost = Math.floor(config.upgradeCost * Math.pow(1.5, existing.level - 1));
+                    const canAfford = oil >= upgradeCost;
+                    upgradeBtn.innerHTML = `
+                        <span class="price-icon">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='25' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='10' width='30' height='20' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="" />
+                        </span>
+                        ${upgradeCost}
+                    `;
+                    upgradeBtn.classList.toggle('disabled', !canAfford);
+                    upgradeBtn.addEventListener('click', () => upgradeBottleLine(index, item));
+                    actions.appendChild(upgradeBtn);
                 } else {
+                    const buyBtn = document.createElement('button');
+                    buyBtn.className = 'buy-btn';
                     const cost = config.baseCost;
                     const canAfford = oil >= cost;
-                    btn.innerHTML = `
+                    buyBtn.innerHTML = `
                         <span class="price-icon">
                             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='25' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='10' width='30' height='20' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="" />
                         </span>
                         ${cost}
                     `;
-                    btn.classList.toggle('disabled', !canAfford);
-                    btn.addEventListener('click', () => buyBottleLine(index, item));
+                    buyBtn.classList.toggle('disabled', !canAfford);
+                    buyBtn.addEventListener('click', () => buyBottleLine(index, item));
+                    actions.appendChild(buyBtn);
                 }
 
                 item.appendChild(icon);
                 item.appendChild(name);
                 item.appendChild(income);
                 item.appendChild(level);
-                item.appendChild(btn);
+                item.appendChild(actions);
                 bottleGridEl.appendChild(item);
             });
         }
@@ -1229,6 +1653,8 @@
             }
 
             oil -= cost;
+            stats.totalOil += cost;
+            stats.sessionOil += cost;
 
             bottleLines.push({
                 id: config.id,
@@ -1236,47 +1662,65 @@
                 income: config.baseIncome,
                 level: 1,
                 baseIncome: config.baseIncome,
-                baseCost: config.baseCost
+                baseCost: config.baseCost,
+                upgradeCost: config.upgradeCost
             });
 
-            // ===== АНИМАЦИЯ ПОКУПКИ =====
+            stats.bottlesBought++;
+            stats.sessionBottlesBought++;
+
             if (itemElement) {
-                // Анимация пульсации
                 itemElement.classList.remove('purchasing');
                 void itemElement.offsetWidth;
                 itemElement.classList.add('purchasing');
-
-                // Партиклы
+                spawnParticles(itemElement, 12);
                 const rect = itemElement.getBoundingClientRect();
-                const cx = rect.left + rect.width / 2;
-                const cy = rect.top + rect.height / 2;
-                for (let i = 0; i < 12; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    const angle = (i / 12) * Math.PI * 2;
-                    const dist = 40 + Math.random() * 40;
-                    particle.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-                    particle.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
-                    particle.style.left = '50%';
-                    particle.style.top = '50%';
-                    particle.style.position = 'absolute';
-                    particle.style.width = '5px';
-                    particle.style.height = '5px';
-                    particle.style.borderRadius = '50%';
-                    particle.style.background = ['#c9922b', '#dbb063', '#f5e6b8', '#ffd700'][Math.floor(Math.random() * 4)];
-                    particle.style.pointerEvents = 'none';
-                    particle.style.animation = `particleFly 0.8s ease-out forwards`;
-                    particle.style.animationDelay = (i * 0.03) + 's';
-                    itemElement.appendChild(particle);
-                    setTimeout(() => particle.remove(), 1000);
-                }
-
-                // Floating text
-                showFloatText(cx - 20, cy - 20, '+🫙', '#c9922b');
+                showFloatText(rect.left + rect.width / 2 - 20, rect.top - 10, '+🫙', '#c9922b');
             }
 
             showToast(`✅ Куплена "${config.name}" (+${config.baseIncome} 🫙/сек)`);
             updateUI();
+            checkAchievements();
+        }
+
+        function upgradeBottleLine(index, itemElement) {
+            const config = BOTTLE_LINES_CONFIG[index];
+            const existing = bottleLines.find(l => l.id === config.id);
+
+            if (!existing) {
+                showToast('❌ Сначала купите линейку');
+                return;
+            }
+
+            const cost = Math.floor(config.upgradeCost * Math.pow(1.5, existing.level - 1));
+
+            if (oil < cost) {
+                showToast('❌ Недостаточно 🫙');
+                return;
+            }
+
+            oil -= cost;
+            stats.totalOil += cost;
+            stats.sessionOil += cost;
+            existing.level++;
+            existing.income = existing.baseIncome * (1 + (existing.level - 1) * 0.4);
+
+            if (existing.level > stats.maxBottleLevel) {
+                stats.maxBottleLevel = existing.level;
+            }
+
+            if (itemElement) {
+                itemElement.classList.remove('upgrading-bottle');
+                void itemElement.offsetWidth;
+                itemElement.classList.add('upgrading-bottle');
+                spawnParticles(itemElement, 8, ['#7aab6a', '#4a7a3a', '#b4d4a4', '#c9922b']);
+                const rect = itemElement.getBoundingClientRect();
+                showFloatText(rect.left + rect.width / 2 - 20, rect.top - 10, `⬆ ур.${existing.level}`, '#7aab6a');
+            }
+
+            showToast(`⬆ ${config.name} → ур.${existing.level} (+${(existing.income - existing.baseIncome * (1 + (existing.level - 2) * 0.4)).toFixed(1)} 🫙/сек)`);
+            updateUI();
+            checkAchievements();
         }
 
         // ===== ГЕНЕРАЦИЯ ПОЛЯ =====
@@ -1368,11 +1812,11 @@
             board[r1][c1] = board[r2][c2];
             board[r2][c2] = temp;
 
-            const matches = findAllMatches();
-            if (matches.length > 0) {
+            const result = findAllMatches();
+            if (result.cells.length > 0) {
                 selectedRow = -1;
                 selectedCol = -1;
-                processMatches(matches);
+                processMatches(result);
             } else {
                 const tempBack = board[r1][c1];
                 board[r1][c1] = board[r2][c2];
@@ -1386,32 +1830,70 @@
 
         function findAllMatches() {
             const matched = new Set();
+            const groups = [];
+
             for (let r = 0; r < BOARD_SIZE; r++) {
-                for (let c = 0; c < BOARD_SIZE; c++) {
-                    const val = board[r][c];
-                    if (c < BOARD_SIZE - 2 && board[r][c + 1] === val && board[r][c + 2] === val) {
-                        let end = c + 2;
-                        while (end + 1 < BOARD_SIZE && board[r][end + 1] === val) end++;
-                        for (let k = c; k <= end; k++) matched.add(r + ',' + k);
+                let c = 0;
+                while (c < BOARD_SIZE) {
+                    let end = c;
+                    while (end + 1 < BOARD_SIZE && board[r][end + 1] === board[r][c]) end++;
+                    if (end - c >= 2) {
+                        const cells = [];
+                        for (let k = c; k <= end; k++) {
+                            matched.add(r + ',' + k);
+                            cells.push({ row: r, col: k });
+                        }
+                        groups.push({ cells, length: end - c + 1 });
                     }
-                    if (r < BOARD_SIZE - 2 && board[r + 1][c] === val && board[r + 2][c] === val) {
-                        let end = r + 2;
-                        while (end + 1 < BOARD_SIZE && board[end + 1][c] === val) end++;
-                        for (let k = r; k <= end; k++) matched.add(k + ',' + c);
-                    }
+                    c = end + 1;
                 }
             }
-            return Array.from(matched).map(s => {
-                const [r, c] = s.split(',').map(Number);
-                return { row: r, col: c };
+
+            for (let c = 0; c < BOARD_SIZE; c++) {
+                let r = 0;
+                while (r < BOARD_SIZE) {
+                    let end = r;
+                    while (end + 1 < BOARD_SIZE && board[end + 1][c] === board[r][c]) end++;
+                    if (end - r >= 2) {
+                        const cells = [];
+                        for (let k = r; k <= end; k++) {
+                            matched.add(k + ',' + c);
+                            cells.push({ row: k, col: c });
+                        }
+                        groups.push({ cells, length: end - r + 1 });
+                    }
+                    r = end + 1;
+                }
+            }
+
+            const bonusMap = new Map();
+            groups.forEach(group => {
+                if (group.length >= 4) {
+                    const bonus = group.length * 3;
+                    group.cells.forEach(cell => {
+                        const key = cell.row + ',' + cell.col;
+                        bonusMap.set(key, (bonusMap.get(key) || 0) + bonus);
+                    });
+                }
             });
+
+            return {
+                cells: Array.from(matched).map(s => {
+                    const [r, c] = s.split(',').map(Number);
+                    return { row: r, col: c };
+                }),
+                bonuses: bonusMap,
+                hasBonus: bonusMap.size > 0
+            };
         }
 
-        function processMatches(matches) {
+        function processMatches(matchResult) {
+            const { cells: matches, bonuses, hasBonus } = matchResult;
+
             if (matches.length === 0) {
-                const newMatches = findAllMatches();
-                if (newMatches.length > 0) {
-                    processMatches(newMatches);
+                const newResult = findAllMatches();
+                if (newResult.cells.length > 0) {
+                    processMatches(newResult);
                 } else {
                     renderBoard();
                     updateUI();
@@ -1419,15 +1901,39 @@
                 return;
             }
 
-            const bonus = matches.length * 2;
+            let bonus = matches.length * 2;
+            let bonusText = '';
+
+            bonuses.forEach((value, key) => {
+                bonus += value;
+                const [r, c] = key.split(',').map(Number);
+                bonusText += ` +${value}`;
+            });
+
             oil += bonus;
-            comboCounter += matches.length;
-            showToast(`✨ +${bonus} 🫙 за урожай!`);
+            stats.totalOil += bonus;
+            stats.sessionOil += bonus;
+            comboCounter++;
+            stats.totalCombos++;
+            stats.sessionCombos++;
+
+            if (hasBonus) {
+                stats.bonusCombos++;
+                showToast(`✨ +${bonus} 🫙 за урожай! (бонус ${bonusText})`);
+            } else {
+                showToast(`✨ +${bonus} 🫙 за урожай!`);
+            }
 
             const cells = document.querySelectorAll('.cell');
             matches.forEach(({ row, col }) => {
                 const idx = row * BOARD_SIZE + col;
-                if (cells[idx]) cells[idx].classList.add('removing');
+                if (cells[idx]) {
+                    cells[idx].classList.add('removing');
+                    const key = row + ',' + col;
+                    if (bonuses.has(key)) {
+                        cells[idx].classList.add('bonus');
+                    }
+                }
             });
 
             matches.forEach(({ row, col }) => {
@@ -1452,13 +1958,14 @@
                 renderBoard();
                 document.querySelectorAll('.cell').forEach(el => el.classList.add('falling'));
 
-                const nextMatches = findAllMatches();
-                if (nextMatches.length > 0) {
-                    setTimeout(() => processMatches(nextMatches), 250);
+                const nextResult = findAllMatches();
+                if (nextResult.cells.length > 0) {
+                    setTimeout(() => processMatches(nextResult), 250);
                 } else {
                     setTimeout(() => {
                         renderBoard();
                         updateUI();
+                        checkAchievements();
                     }, 250);
                 }
             }, 250);
@@ -1475,13 +1982,16 @@
         // ===== КЛИКЕР =====
         function handleClick() {
             oil += clickPower;
+            stats.totalOil += clickPower;
+            stats.sessionOil += clickPower;
             const btn = document.getElementById('clickBtn');
             btn.style.transform = 'scale(0.90)';
             setTimeout(() => btn.style.transform = '', 80);
             updateUI();
+            checkAchievements();
         }
 
-        // ===== УЛУЧШЕНИЕ КЛИКА С АНИМАЦИЕЙ =====
+        // ===== УЛУЧШЕНИЕ КЛИКА =====
         function buyClickUpgrade() {
             if (oil < clickUpgradeCost) return;
 
@@ -1490,10 +2000,11 @@
 
             oil -= clickUpgradeCost;
             clickLevel++;
+            stats.clickLevel = clickLevel;
+            stats.sessionClickLevel = clickLevel;
             clickPower += 1;
             clickUpgradeCost = Math.floor(clickUpgradeCost * 1.8) + 2;
 
-            // Анимация
             btn.classList.remove('upgrading');
             void btn.offsetWidth;
             btn.classList.add('upgrading');
@@ -1502,14 +2013,14 @@
             void clickFlash.offsetWidth;
             clickFlash.classList.add('active');
 
-            // Floating text
             showFloatText(rect.left + rect.width / 2 - 20, rect.top - 10, '+1 ⚡', '#ffd700');
 
             updateUI();
             showToast(`🔧 Клик → ур.${clickLevel} (+1 🫙)`);
+            checkAchievements();
         }
 
-        // ===== УЛУЧШЕНИЕ ПАССИВНОГО ДОХОДА С АНИМАЦИЕЙ =====
+        // ===== УЛУЧШЕНИЕ ПАССИВНОГО ДОХОДА =====
         function buyPassiveUpgrade() {
             if (oil < passiveUpgradeCost) return;
 
@@ -1518,10 +2029,11 @@
 
             oil -= passiveUpgradeCost;
             passiveLevel++;
+            stats.passiveLevel = passiveLevel;
+            stats.sessionPassiveLevel = passiveLevel;
             passiveIncome += 0.5;
             passiveUpgradeCost = Math.floor(passiveUpgradeCost * 1.8) + 5;
 
-            // Анимация
             btn.classList.remove('upgrading');
             void btn.offsetWidth;
             btn.classList.add('upgrading');
@@ -1530,11 +2042,11 @@
             void passiveFlash.offsetWidth;
             passiveFlash.classList.add('active');
 
-            // Floating text
             showFloatText(rect.left + rect.width / 2 - 20, rect.top - 10, '+0.5 🏭', '#7aab6a');
 
             updateUI();
             showToast(`🏭 Пассивный доход → ур.${passiveLevel} (+0.5 🫙/сек)`);
+            checkAchievements();
         }
 
         // ===== ТИКЕР ПАССИВНОГО ДОХОДА =====
@@ -1542,26 +2054,51 @@
             const totalPassive = getTotalPassive();
             if (totalPassive > 0) {
                 oil += totalPassive;
+                stats.totalOil += totalPassive;
+                stats.sessionOil += totalPassive;
                 updateUI();
                 if (totalPassive >= 2 && Math.random() < 0.1) {
                     showToast(`🏭 +${totalPassive.toFixed(1)} 🫙 пассивно`);
                 }
+                checkAchievements();
             }
         }, 1000);
+
+        // ===== МОДАЛЬНОЕ ОКНО ДОСТИЖЕНИЙ =====
+        document.getElementById('achievementsToggle').addEventListener('click', () => {
+            renderAchievements();
+            achievementsOverlay.classList.add('active');
+        });
+
+        document.getElementById('closeAchievements').addEventListener('click', () => {
+            achievementsOverlay.classList.remove('active');
+        });
+
+        achievementsOverlay.addEventListener('click', (e) => {
+            if (e.target === achievementsOverlay) {
+                achievementsOverlay.classList.remove('active');
+            }
+        });
 
         // ============================================================
         //  ИНИЦИАЛИЗАЦИЯ
         // ============================================================
 
         function init() {
+            loadAchievements();
+
             board = generateBoard();
             renderBoard();
             updateUI();
+            updateAchievementBadge();
 
             document.getElementById('clickBtn').addEventListener('click', handleClick);
             document.getElementById('upgradeClick').addEventListener('click', buyClickUpgrade);
             document.getElementById('upgradePassive').addEventListener('click', buyPassiveUpgrade);
             document.getElementById('shuffleBtn').addEventListener('click', shuffleBoard);
+
+            // Проверяем достижения при старте
+            checkAchievements();
 
             // Для замены на вашу картинку (раскомментируйте):
             // const logo = document.getElementById('brandLogo');
