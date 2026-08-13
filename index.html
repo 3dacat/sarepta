@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Verdana', 'Segoe UI', Tahoma, Geneva, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -27,7 +27,7 @@
             max-width: 1100px;
             width: 100%;
             background: linear-gradient(145deg, #fef7e0, #f5e6b8);
-            border-radius: 40px;
+            border-radius: 0px;
             padding: 25px 30px 35px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 4px rgba(255, 255, 200, 0.6);
             border: 2px solid #d4b87a;
@@ -49,6 +49,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .logo-area .logo-placeholder {
@@ -69,22 +70,29 @@
         }
 
         .logo-area h1 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             color: #1a3f5c;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             display: flex;
             align-items: center;
             gap: 12px;
+            font-family: 'Verdana', sans-serif;
         }
         .logo-area h1 span {
             color: #c9922b;
         }
 
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
         .achievements-toggle {
             background: #c9922b;
             border: none;
-            border-radius: 40px;
+            border-radius: 0px;
             padding: 4px 16px;
             font-weight: 700;
             font-size: 13px;
@@ -95,6 +103,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .achievements-toggle:active {
@@ -115,12 +124,47 @@
             font-weight: 700;
         }
 
+        .bottles-menu-toggle {
+            background: #4a7a3a;
+            border: none;
+            border-radius: 0px;
+            padding: 4px 16px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #fef7e0;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #2a5a2a;
+            transition: 0.08s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .bottles-menu-toggle:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 #2a5a2a;
+        }
+
+        .bottles-menu-toggle .badge {
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
         .stats {
             display: flex;
             gap: 20px;
             background: rgba(26, 63, 92, 0.10);
             padding: 6px 18px;
-            border-radius: 60px;
+            border-radius: 0px;
             border: 1px solid #d4b87a;
             align-items: center;
             flex-wrap: wrap;
@@ -133,12 +177,13 @@
             font-size: 16px;
             font-weight: 600;
             color: #1a3f5c;
+            font-family: 'Verdana', sans-serif;
         }
 
         .stat-item .icon {
             width: 24px;
             height: 24px;
-            border-radius: 5px;
+            border-radius: 0px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -157,7 +202,7 @@
             text-align: center;
             background: white;
             padding: 0 10px;
-            border-radius: 40px;
+            border-radius: 0px;
             color: #0b2b4a;
         }
 
@@ -172,7 +217,7 @@
         /* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
         .clicker-panel {
             background: rgba(255, 248, 225, 0.7);
-            border-radius: 28px;
+            border-radius: 0px;
             padding: 16px 14px 18px;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 18px rgba(0, 0, 0, 0.12);
             border: 1px solid #dcc18a;
@@ -189,38 +234,40 @@
         }
         .clicker-panel::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.05);
-            border-radius: 10px;
+            border-radius: 0px;
         }
         .clicker-panel::-webkit-scrollbar-thumb {
             background: #c9922b;
-            border-radius: 10px;
+            border-radius: 0px;
         }
 
         .clicker-panel h2 {
-            font-size: 15px;
+            font-size: 18px;
             color: #1a3f5c;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 2px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .clicker-panel .sub {
-            font-size: 11px;
+            font-size: 12px;
             color: #7a643a;
             margin-bottom: 10px;
+            font-family: 'Verdana', sans-serif;
         }
 
         /* КНОПКА-БУТЫЛКА */
         .bottle-btn {
-            width: 100px;
-            height: 100px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #f9e7b3, #dbb063);
-            border: 5px solid #b8944c;
-            box-shadow: 0 8px 0 #7a5f2e, 0 10px 24px rgba(0, 0, 0, 0.3);
+            border: 6px solid #b8944c;
+            box-shadow: 0 8px 0 #7a5f2e, 0 12px 28px rgba(0, 0, 0, 0.3);
             cursor: pointer;
             transition: all 0.08s ease;
-            padding: 10px;
+            padding: 14px;
             margin-bottom: 10px;
             position: relative;
             overflow: hidden;
@@ -261,18 +308,19 @@
         }
 
         .clicker-stats p {
-            font-size: 13px;
+            font-size: 14px;
             color: #1a3f5c;
             margin: 2px 0;
             background: rgba(255, 255, 255, 0.5);
             padding: 2px 10px;
-            border-radius: 40px;
+            border-radius: 0px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .clicker-stats .highlight {
             font-weight: 700;
             color: #c9922b;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         /* ===== УЛУЧШЕНИЯ ===== */
@@ -285,7 +333,7 @@
         }
 
         .upgrade-section-title {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: #1a3f5c;
             letter-spacing: 1px;
@@ -293,14 +341,15 @@
             margin: 4px 0 2px 0;
             padding: 2px 8px;
             background: rgba(201, 146, 43, 0.15);
-            border-radius: 20px;
+            border-radius: 0px;
             text-align: center;
+            font-family: 'Verdana', sans-serif;
         }
 
         .upgrade-btn {
             background: #1a3f5c;
             border: none;
-            border-radius: 60px;
+            border-radius: 0px;
             padding: 7px 12px;
             color: #fef7e0;
             font-weight: 600;
@@ -314,6 +363,7 @@
             width: 100%;
             position: relative;
             overflow: hidden;
+            font-family: 'Verdana', sans-serif;
         }
 
         .upgrade-btn:hover {
@@ -328,7 +378,7 @@
         .upgrade-btn .price {
             background: #c9922b;
             padding: 2px 12px;
-            border-radius: 40px;
+            border-radius: 0px;
             font-size: 12px;
             color: #1a1a1a;
             display: flex;
@@ -339,7 +389,7 @@
         .upgrade-btn .price .price-icon {
             width: 16px;
             height: 16px;
-            border-radius: 3px;
+            border-radius: 0px;
             overflow: hidden;
             display: inline-flex;
             align-items: center;
@@ -356,7 +406,7 @@
         .upgrade-btn .level-badge {
             background: rgba(255, 255, 255, 0.15);
             padding: 1px 10px;
-            border-radius: 40px;
+            border-radius: 0px;
             font-size: 10px;
             color: #fef7e0;
         }
@@ -412,7 +462,7 @@
 
         .bottle-item {
             background: rgba(255, 248, 225, 0.5);
-            border-radius: 12px;
+            border-radius: 0px;
             padding: 6px 8px 8px;
             border: 1px solid #dcc18a;
             display: flex;
@@ -446,6 +496,7 @@
             letter-spacing: 0.3px;
             line-height: 1.2;
             text-align: center;
+            font-family: 'Verdana', sans-serif;
         }
 
         .bottle-item .bottle-income {
@@ -454,12 +505,14 @@
             color: #c9922b;
             margin: 1px 0;
             transition: all 0.3s ease;
+            font-family: 'Verdana', sans-serif;
         }
 
         .bottle-item .bottle-level {
             font-size: 8px;
             color: #7a643a;
             margin-bottom: 2px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .bottle-item .bottle-actions {
@@ -472,7 +525,7 @@
         .bottle-item .bottle-actions .upgrade-bottle-btn {
             background: #1a3f5c;
             border: none;
-            border-radius: 40px;
+            border-radius: 0px;
             padding: 3px 10px;
             color: #fef7e0;
             font-size: 9px;
@@ -487,6 +540,7 @@
             flex: 1;
             position: relative;
             overflow: hidden;
+            font-family: 'Verdana', sans-serif;
         }
 
         .bottle-item .bottle-actions .buy-btn:hover,
@@ -520,7 +574,7 @@
         .bottle-item .bottle-actions .upgrade-bottle-btn .price-icon {
             width: 12px;
             height: 12px;
-            border-radius: 3px;
+            border-radius: 0px;
             overflow: hidden;
             display: inline-flex;
             align-items: center;
@@ -598,6 +652,7 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(201, 146, 43, 0.3);
             z-index: 1000;
             animation: floatUp 1s ease-out forwards;
+            font-family: 'Verdana', sans-serif;
         }
 
         @keyframes floatUp {
@@ -615,7 +670,7 @@
         /* ===== ТРИ-В-РЯД ===== */
         .match3-panel {
             background: rgba(26, 63, 92, 0.06);
-            border-radius: 28px;
+            border-radius: 0px;
             padding: 14px 14px 16px;
             border: 1px solid #dcc18a;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -633,6 +688,7 @@
             color: #1a3f5c;
             font-size: 16px;
             letter-spacing: 1px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .match3-panel .match-header .hint {
@@ -640,7 +696,8 @@
             color: #7a643a;
             background: rgba(255, 255, 200, 0.6);
             padding: 2px 12px;
-            border-radius: 40px;
+            border-radius: 0px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .board {
@@ -650,14 +707,14 @@
             aspect-ratio: 1/1;
             background: #dcc18a;
             padding: 5px;
-            border-radius: 16px;
+            border-radius: 0px;
             box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.2);
             margin-bottom: 8px;
         }
 
         .cell {
             background: #f5e6b8;
-            border-radius: 7px;
+            border-radius: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -724,6 +781,7 @@
             color: #1a3f5c;
             font-weight: 600;
             font-size: 13px;
+            font-family: 'Verdana', sans-serif;
         }
         .match-footer .combo-info span {
             color: #c9922b;
@@ -733,7 +791,7 @@
         .shuffle-btn {
             background: #c9922b;
             border: none;
-            border-radius: 40px;
+            border-radius: 12px;
             padding: 4px 16px;
             font-weight: 700;
             font-size: 12px;
@@ -741,13 +799,14 @@
             cursor: pointer;
             box-shadow: 0 4px 0 #7a5f2e;
             transition: 0.08s;
+            font-family: 'Verdana', sans-serif;
         }
         .shuffle-btn:active {
             transform: translateY(4px);
             box-shadow: 0 0px 0 #7a5f2e;
         }
 
-        /* ===== МОДАЛЬНОЕ ОКНО ДОСТИЖЕНИЙ ===== */
+        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
         .achievements-overlay {
             display: none;
             position: fixed;
@@ -755,7 +814,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
             z-index: 2000;
             justify-content: center;
@@ -767,27 +826,217 @@
             display: flex;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .bottles-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
         }
 
-        .achievements-modal {
+        .bottles-overlay.active {
+            display: flex;
+        }
+
+        .bottles-modal {
             background: linear-gradient(145deg, #fef7e0, #f5e6b8);
-            border-radius: 32px;
-            padding: 30px 35px 35px;
-            max-width: 650px;
-            width: 90%;
-            max-height: 80vh;
+            border-radius: 0px;
+            padding: 25px 30px 30px;
+            max-width: 600px;
+            width: 95%;
+            max-height: 85vh;
             overflow-y: auto;
             border: 2px solid #d4b87a;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             animation: slideUp 0.3s ease;
         }
 
-        @keyframes slideUp {
-            0% { transform: translateY(30px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
+        .bottles-modal::-webkit-scrollbar {
+            width: 4px;
+        }
+        .bottles-modal::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 0px;
+        }
+        .bottles-modal::-webkit-scrollbar-thumb {
+            background: #c9922b;
+            border-radius: 0px;
+        }
+
+        .bottles-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #b8944c;
+        }
+
+        .bottles-modal .modal-header h2 {
+            font-size: 22px;
+            color: #1a3f5c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .bottles-modal .modal-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #1a3f5c;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottles-modal .modal-header .close-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+            transform: rotate(90deg);
+        }
+
+        .bottles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .bottle-card {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 0px;
+            padding: 12px 16px;
+            border: 1px solid #dcc18a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s;
+        }
+
+        .bottle-card .bottle-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bottle-card .bottle-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .bottle-card .bottle-info {
+            flex: 1;
+        }
+
+        .bottle-card .bottle-info .bottle-name {
+            font-weight: 700;
+            color: #1a3f5c;
+            font-size: 14px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .bottle-card .bottle-info .bottle-desc {
+            font-size: 11px;
+            color: #7a643a;
+            margin-top: 2px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .bottle-card .bottle-info .bottle-stats {
+            font-size: 11px;
+            color: #c9922b;
+            font-weight: 600;
+            margin-top: 2px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .bottle-card .launch-btn {
+            background: #1a3f5c;
+            border: none;
+            border-radius: 0px;
+            padding: 6px 16px;
+            color: #fef7e0;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            box-shadow: 0 3px 0 #0b2b4a;
+            flex-shrink: 0;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        .bottle-card .launch-btn:hover {
+            background: #235a80;
+        }
+        .bottle-card .launch-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 0px 0 #0b2b4a;
+        }
+        .bottle-card .launch-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+
+        .bottle-card .launch-btn .price-icon {
+            width: 14px;
+            height: 14px;
+            border-radius: 0px;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #b8944c;
+        }
+        .bottle-card .launch-btn .price-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bottle-card.launched {
+            background: rgba(42, 90, 58, 0.12);
+            border-color: #4a7a3a;
+        }
+
+        .bottle-card.launched .launch-btn {
+            background: #4a7a3a;
+            box-shadow: 0 3px 0 #2a5a2a;
+            cursor: default;
+        }
+
+        .bottle-card.launched .launch-btn:hover {
+            background: #4a7a3a;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ДОСТИЖЕНИЙ ===== */
+        .achievements-modal {
+            background: linear-gradient(145deg, #fef7e0, #f5e6b8);
+            border-radius: 0px;
+            padding: 25px 30px 30px;
+            max-width: 700px;
+            width: 95%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid #d4b87a;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
         }
 
         .achievements-modal::-webkit-scrollbar {
@@ -795,19 +1044,19 @@
         }
         .achievements-modal::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.05);
-            border-radius: 10px;
+            border-radius: 0px;
         }
         .achievements-modal::-webkit-scrollbar-thumb {
             background: #c9922b;
-            border-radius: 10px;
+            border-radius: 0px;
         }
 
         .achievements-modal .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
             border-bottom: 2px dashed #b8944c;
         }
 
@@ -817,6 +1066,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .achievements-modal .modal-header .close-btn {
@@ -840,25 +1090,26 @@
         }
 
         .achievement-section-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #1a3f5c;
-            margin: 14px 0 10px 0;
-            padding: 4px 12px;
+            margin: 10px 0 8px 0;
+            padding: 3px 10px;
             background: rgba(201, 146, 43, 0.12);
-            border-radius: 20px;
+            border-radius: 0px;
             display: inline-block;
+            font-family: 'Verdana', sans-serif;
         }
 
         .achievement-item {
             background: rgba(255, 255, 255, 0.5);
-            border-radius: 16px;
-            padding: 12px 16px;
-            margin-bottom: 8px;
+            border-radius: 0px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
             border: 1px solid #dcc18a;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             transition: all 0.3s;
         }
 
@@ -873,8 +1124,8 @@
         }
 
         .achievement-item .ach-icon {
-            font-size: 28px;
-            width: 44px;
+            font-size: 26px;
+            width: 40px;
             text-align: center;
             flex-shrink: 0;
         }
@@ -887,23 +1138,26 @@
         .achievement-item .ach-info .ach-name {
             font-weight: 700;
             color: #1a3f5c;
-            font-size: 14px;
+            font-size: 13px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .achievement-item .ach-info .ach-desc {
             font-size: 11px;
             color: #7a643a;
             margin-top: 1px;
+            font-family: 'Verdana', sans-serif;
         }
 
         .achievement-item .ach-status {
             font-size: 10px;
             font-weight: 600;
             padding: 2px 10px;
-            border-radius: 40px;
+            border-radius: 0px;
             flex-shrink: 0;
             text-align: center;
             white-space: nowrap;
+            font-family: 'Verdana', sans-serif;
         }
 
         .achievement-item.unlocked .ach-status {
@@ -920,7 +1174,7 @@
             width: 100%;
             height: 3px;
             background: #dcc18a;
-            border-radius: 4px;
+            border-radius: 0px;
             margin-top: 4px;
             overflow: hidden;
         }
@@ -928,33 +1182,12 @@
         .achievement-item .ach-progress .ach-progress-bar {
             height: 100%;
             background: #c9922b;
-            border-radius: 4px;
+            border-radius: 0px;
             transition: width 0.5s ease;
         }
 
         .achievement-item.unlocked .ach-progress .ach-progress-bar {
             background: #4a7a3a;
-        }
-
-        .achievement-item .ach-badge-session {
-            font-size: 9px;
-            background: rgba(201, 146, 43, 0.2);
-            padding: 1px 8px;
-            border-radius: 40px;
-            color: #7a643a;
-            margin-top: 2px;
-            display: inline-block;
-        }
-
-        .achievement-item .ach-first-unlock {
-            font-size: 9px;
-            background: rgba(255, 215, 0, 0.25);
-            padding: 1px 8px;
-            border-radius: 40px;
-            color: #c9922b;
-            margin-top: 2px;
-            display: inline-block;
-            margin-left: 6px;
         }
 
         /* ===== ТОСТ ===== */
@@ -966,7 +1199,7 @@
             background: #1a3f5c;
             color: #fef7e0;
             padding: 10px 24px;
-            border-radius: 60px;
+            border-radius: 12px;
             font-size: 14px;
             font-weight: 600;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
@@ -978,25 +1211,30 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Verdana', sans-serif;
         }
+
         .toast .toast-icon {
             width: 22px;
             height: 22px;
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #c9922b;
         }
+
         .toast .toast-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .toast.show {
             opacity: 1;
         }
+
         .toast.achievement-unlock {
             border-color: #ffd700;
             background: #2a5a3a;
@@ -1020,7 +1258,7 @@
                 gap: 6px;
                 padding: 12px;
             }
-            .bottle-btn { width: 70px; height: 70px; padding: 7px; margin-bottom: 0; }
+            .bottle-btn { width: 100px; height: 100px; padding: 10px; margin-bottom: 0; }
             .clicker-stats { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
             .clicker-stats p { margin: 0; font-size: 12px; padding: 2px 8px; }
             .upgrades-container { flex-direction: row; flex-wrap: wrap; justify-content: center; }
@@ -1030,13 +1268,16 @@
             .stats { gap: 12px; padding: 5px 12px; flex-wrap: wrap; justify-content: center; }
             .stat-item { font-size: 14px; }
             .board { gap: 3px; padding: 4px; }
-            .cell { border-radius: 5px; padding: 5%; }
+            .cell { border-radius: 6px; padding: 5%; }
             .bottle-item .bottle-actions { flex-direction: column; gap: 2px; }
             .bottle-item .bottle-actions .buy-btn,
             .bottle-item .bottle-actions .upgrade-bottle-btn { font-size: 8px; padding: 2px 6px; }
-            .achievements-modal { padding: 20px; max-width: 95%; }
-            .achievement-item { padding: 10px 12px; flex-wrap: wrap; }
-            .achievement-item .ach-icon { font-size: 22px; width: 36px; }
+            .achievements-modal { padding: 16px; max-width: 95%; }
+            .achievement-item { padding: 8px 10px; flex-wrap: wrap; }
+            .achievement-item .ach-icon { font-size: 20px; width: 32px; }
+            .bottles-modal { padding: 16px; max-width: 95%; }
+            .bottle-card { flex-wrap: wrap; gap: 10px; }
+            .bottle-card .bottle-icon { width: 32px; height: 32px; }
         }
 
         @media (max-width: 480px) {
@@ -1044,17 +1285,32 @@
             .logo-area h1 { font-size: 18px; }
             .board { gap: 2px; padding: 3px; }
             .cell { border-radius: 4px; padding: 4%; }
-            .bottle-btn { width: 60px; height: 60px; padding: 5px; }
+            .bottle-btn { width: 80px; height: 80px; padding: 8px; }
             .header { gap: 6px; }
             .stats .stat-item .value { min-width: 25px; padding: 0 6px; font-size: 13px; }
             .upgrade-btn { min-width: 100px; font-size: 10px; padding: 4px 8px; }
             .bottle-grid { grid-template-columns: repeat(2, 1fr); }
             .bottle-item .bottle-icon { width: 26px; height: 26px; }
             .bottle-item .bottle-name { font-size: 8px; }
-            .achievements-modal { padding: 14px; }
-            .achievement-item { padding: 8px 10px; gap: 10px; }
-            .achievement-item .ach-icon { font-size: 18px; width: 30px; }
-            .achievement-item .ach-info .ach-name { font-size: 12px; }
+            .achievements-modal { padding: 12px; }
+            .achievement-item { padding: 6px 8px; gap: 8px; }
+            .achievement-item .ach-icon { font-size: 18px; width: 28px; }
+            .achievement-item .ach-info .ach-name { font-size: 11px; }
+            .bottles-modal { padding: 12px; }
+            .bottle-card { padding: 10px 12px; gap: 8px; }
+            .bottle-card .bottle-icon { width: 28px; height: 28px; }
+            .bottle-card .bottle-info .bottle-name { font-size: 12px; }
+            .bottle-card .launch-btn { font-size: 10px; padding: 4px 12px; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -1079,6 +1335,17 @@
         </div>
     </div>
 
+    <!-- ===== МОДАЛЬНОЕ ОКНО ЗАПУСКА БУТЫЛОК ===== -->
+    <div class="bottles-overlay" id="bottlesOverlay">
+        <div class="bottles-modal">
+            <div class="modal-header">
+                <h2>🫙 Запуск бутылок</h2>
+                <button class="close-btn" id="closeBottles">✕</button>
+            </div>
+            <div class="bottles-list" id="bottlesList"></div>
+        </div>
+    </div>
+
     <!-- ===== ОБЁРТКА ===== -->
     <div class="game-wrapper">
 
@@ -1090,11 +1357,17 @@
                 </div>
                 <h1>
                     САРЕПТА <span>✦</span>
+                </h1>
+                <div class="header-buttons">
+                    <button class="bottles-menu-toggle" id="bottlesToggle">
+                        🫙
+                        <span class="badge" id="bottlesBadge">0</span>
+                    </button>
                     <button class="achievements-toggle" id="achievementsToggle">
                         🏆
                         <span class="badge" id="achBadge">0</span>
                     </button>
-                </h1>
+                </div>
             </div>
             <div class="stats">
                 <div class="stat-item">
@@ -1167,6 +1440,8 @@
 
             <!-- ПРАВАЯ ПАНЕЛЬ -->
             <div class="right-panel">
+
+                <!-- ТРИ-В-РЯД -->
                 <section class="match3-panel">
                     <div class="match-header">
                         <h3>🌾 Собери урожай</h3>
@@ -1178,6 +1453,7 @@
                         <button class="shuffle-btn" id="shuffleBtn">⟳ Перемешать</button>
                     </div>
                 </section>
+
             </div>
         </div>
     </div>
@@ -1223,89 +1499,277 @@
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#d4b87a" stroke="#b8944c" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#fef7e0" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
+            </svg>`,
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#9b6ab8" stroke="#6a3a87" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#7a4a97" stroke="#5a2a77" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#c9a4e0" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#e8a04a" stroke="#b8702a" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#d08830" stroke="#a0601a" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#f5d4a4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
+            </svg>`,
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#4ab8b8" stroke="#1a8a8a" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#2a9a9a" stroke="#1a6a6a" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#a4e4e4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#e87090" stroke="#b84a6a" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#d05070" stroke="#a03a5a" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#f5b4c4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+            </svg>`,
+            // Новая: Серебряная
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#c0c0c0" stroke="#8a8a8a" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#a8a8a8" stroke="#7a7a7a" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#e8e8e8" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
+            </svg>`,
+            // Новая: Платиновая
+            `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#4a6a7a" stroke="#2a4a5a" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#3a5a6a" stroke="#1a3a4a" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#8ab4c4" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`
         ];
 
+        // ВСЕ 12 ЛИНЕЕК (6 основных + 4 ультра + 2 новые)
         const BOTTLE_LINES_CONFIG = [
             { id: 'gold', name: 'Золотая', baseIncome: 0.5, baseCost: 200, upgradeCost: 150, iconIndex: 0 },
             { id: 'blue', name: 'Синяя', baseIncome: 1.0, baseCost: 350, upgradeCost: 250, iconIndex: 1 },
             { id: 'green', name: 'Зелёная', baseIncome: 1.8, baseCost: 550, upgradeCost: 400, iconIndex: 2 },
             { id: 'red', name: 'Красная', baseIncome: 3.0, baseCost: 800, upgradeCost: 600, iconIndex: 3 },
             { id: 'dark', name: 'Тёмная', baseIncome: 5.0, baseCost: 1200, upgradeCost: 900, iconIndex: 4 },
-            { id: 'light', name: 'Светлая', baseIncome: 8.0, baseCost: 1800, upgradeCost: 1300, iconIndex: 5 }
+            { id: 'light', name: 'Светлая', baseIncome: 8.0, baseCost: 1800, upgradeCost: 1300, iconIndex: 5 },
+            { id: 'purple', name: 'Фиолетовая', baseIncome: 2.5, baseCost: 2500, upgradeCost: 1800, iconIndex: 6 },
+            { id: 'orange', name: 'Оранжевая', baseIncome: 4.0, baseCost: 4000, upgradeCost: 2800, iconIndex: 7 },
+            { id: 'turquoise', name: 'Бирюзовая', baseIncome: 6.5, baseCost: 6500, upgradeCost: 4500, iconIndex: 8 },
+            { id: 'pink', name: 'Розовая', baseIncome: 10.0, baseCost: 10000, upgradeCost: 7000, iconIndex: 9 },
+            { id: 'silver', name: 'Серебряная', baseIncome: 12.0, baseCost: 14000, upgradeCost: 9500, iconIndex: 10 },
+            { id: 'platinum', name: 'Платиновая', baseIncome: 15.0, baseCost: 20000, upgradeCost: 13000, iconIndex: 11 }
         ];
+
+        // Дополнительные бутылки для запуска (уже не нужны, все в основных)
+        const LAUNCHABLE_BOTTLES = [];
 
         // ===== ДОСТИЖЕНИЯ =====
-        // Все достижения становятся вечными при первом разблокировании!
-        // session: true означает, что достижение показывается только в текущей сессии,
-        // но при первом разблокировании оно сохраняется навсегда
-        const ACHIEVEMENTS = [
-            // Базовые достижения (всегда вечные)
-            { id: 'first_combo', name: 'Первый урожай', desc: 'Собери первую комбинацию', icon: '🌱',
-                check: (s) => s.totalCombos >= 1 },
-            { id: 'combo_10', name: 'Сборщик урожая', desc: 'Собери 10 комбинаций', icon: '🌾',
-                check: (s) => s.totalCombos >= 10 },
-            { id: 'combo_50', name: 'Опытный фермер', desc: 'Собери 50 комбинаций', icon: '🚜',
-                check: (s) => s.totalCombos >= 50 },
-            { id: 'combo_100', name: 'Мастер урожая', desc: 'Собери 100 комбинаций', icon: '🏅',
-                check: (s) => s.totalCombos >= 100 },
-            { id: 'combo_500', name: 'Легенда полей', desc: 'Собери 500 комбинаций', icon: '👑',
-                check: (s) => s.totalCombos >= 500 },
-            { id: 'combo_1000', name: 'Император урожая', desc: 'Собери 1000 комбинаций', icon: '👑',
-                check: (s) => s.totalCombos >= 1000 },
-            { id: 'combo_5000', name: 'Повелитель полей', desc: 'Собери 5000 комбинаций', icon: '👑',
-                check: (s) => s.totalCombos >= 5000 },
-            { id: 'combo_10000', name: 'Бог урожая', desc: 'Собери 10000 комбинаций', icon: '👑',
-                check: (s) => s.totalCombos >= 10000 },
-            { id: 'combo_15000', name: 'Абсолютный урожай', desc: 'Собери 15000 комбинаций', icon: '👑',
-                check: (s) => s.totalCombos >= 15000 },
-            { id: 'oil_1000', name: 'Богатый урожай', desc: 'Накопи 1000 🫙', icon: '💰', check: (s) => s.totalOil >=
+        const ACHIEVEMENTS = [];
+
+        // ---- Комбинации (20) ----
+        const comboAchievements = [
+            { id: 'combo_1', name: 'Первый шаг', desc: 'Собери 1 комбинацию', icon: '🌱', check: (s) => s
+                    .totalCombos >= 1 },
+            { id: 'combo_5', name: 'Начинающий фермер', desc: 'Собери 5 комбинаций', icon: '🌿', check: (s) => s
+                    .totalCombos >= 5 },
+            { id: 'combo_10', name: 'Сборщик урожая', desc: 'Собери 10 комбинаций', icon: '🌾', check: (s) => s
+                    .totalCombos >= 10 },
+            { id: 'combo_25', name: 'Трудолюбивый', desc: 'Собери 25 комбинаций', icon: '🧑‍🌾', check: (s) => s
+                    .totalCombos >= 25 },
+            { id: 'combo_50', name: 'Опытный фермер', desc: 'Собери 50 комбинаций', icon: '🚜', check: (s) => s
+                    .totalCombos >= 50 },
+            { id: 'combo_75', name: 'Мастер полей', desc: 'Собери 75 комбинаций', icon: '🌻', check: (s) => s
+                    .totalCombos >= 75 },
+            { id: 'combo_100', name: 'Мастер урожая', desc: 'Собери 100 комбинаций', icon: '🏅', check: (s) => s
+                    .totalCombos >= 100 },
+            { id: 'combo_150', name: 'Золотые руки', desc: 'Собери 150 комбинаций', icon: '✨', check: (s) => s
+                    .totalCombos >= 150 },
+            { id: 'combo_200', name: 'Урожайный сезон', desc: 'Собери 200 комбинаций', icon: '📦', check: (s) => s
+                    .totalCombos >= 200 },
+            { id: 'combo_300', name: 'Агроном', desc: 'Собери 300 комбинаций', icon: '🌳', check: (s) => s
+                    .totalCombos >= 300 },
+            { id: 'combo_500', name: 'Легенда полей', desc: 'Собери 500 комбинаций', icon: '👑', check: (s) => s
+                    .totalCombos >= 500 },
+            { id: 'combo_750', name: 'Хранитель урожая', desc: 'Собери 750 комбинаций', icon: '🏰', check: (s) => s
+                    .totalCombos >= 750 },
+            { id: 'combo_1000', name: 'Император урожая', desc: 'Собери 1000 комбинаций', icon: '👑', check: (
+                s) => s.totalCombos >= 1000 },
+            { id: 'combo_2000', name: 'Повелитель полей', desc: 'Собери 2000 комбинаций', icon: '⚜️', check: (
+                s) => s.totalCombos >= 2000 },
+            { id: 'combo_5000', name: 'Бог урожая', desc: 'Собери 5000 комбинаций', icon: '🌟', check: (s) => s
+                    .totalCombos >= 5000 },
+            { id: 'combo_10000', name: 'Абсолютный урожай', desc: 'Собери 10000 комбинаций', icon: '💫', check: (
+                s) => s.totalCombos >= 10000 },
+            { id: 'combo_25000', name: 'Легендарный фермер', desc: 'Собери 25000 комбинаций', icon: '🔥', check: (
+                s) => s.totalCombos >= 25000 },
+            { id: 'combo_50000', name: 'Миф о полях', desc: 'Собери 50000 комбинаций', icon: '🐉', check: (s) => s
+                    .totalCombos >= 50000 },
+            { id: 'combo_100000', name: 'Аграрный бог', desc: 'Собери 100000 комбинаций', icon: '👁️', check: (
+                s) => s.totalCombos >= 100000 },
+            { id: 'combo_999999', name: '∞ Бесконечный урожай', desc: 'Собери 999999 комбинаций', icon: '♾️',
+                check: (s) => s.totalCombos >= 999999 },
+        ];
+
+        // ---- Масло (15) ----
+        const oilAchievements = [
+            { id: 'oil_100', name: 'Первый доход', desc: 'Накопи 100 🫙', icon: '🪙', check: (s) => s.totalOil >=
+                100 },
+            { id: 'oil_250', name: 'Копилка', desc: 'Накопи 250 🫙', icon: '🏺', check: (s) => s.totalOil >= 250 },
+            { id: 'oil_500', name: 'Малый бизнес', desc: 'Накопи 500 🫙', icon: '💰', check: (s) => s.totalOil >=
+                500 },
+            { id: 'oil_1000', name: 'Богатый урожай', desc: 'Накопи 1000 🫙', icon: '💎', check: (s) => s.totalOil >=
                 1000 },
-            { id: 'oil_10000', name: 'Магнат масла', desc: 'Накопи 10000 🫙', icon: '💎', check: (s) => s.totalOil >=
+            { id: 'oil_2500', name: 'Состоятельный', desc: 'Накопи 2500 🫙', icon: '💼', check: (s) => s.totalOil >=
+                2500 },
+            { id: 'oil_5000', name: 'Крупный игрок', desc: 'Накопи 5000 🫙', icon: '🏦', check: (s) => s.totalOil >=
+                5000 },
+            { id: 'oil_10000', name: 'Магнат масла', desc: 'Накопи 10000 🫙', icon: '👑', check: (s) => s.totalOil >=
                 10000 },
-            { id: 'oil_100000', name: 'Нефтяной барон', desc: 'Накопи 100000 🫙', icon: '💎', check: (s) => s
+            { id: 'oil_25000', name: 'Масляный барон', desc: 'Накопи 25000 🫙', icon: '🏛️', check: (s) => s
+                    .totalOil >= 25000 },
+            { id: 'oil_50000', name: 'Нефтяной магнат', desc: 'Накопи 50000 🫙', icon: '💎', check: (s) => s
+                    .totalOil >= 50000 },
+            { id: 'oil_100000', name: 'Нефтяной барон', desc: 'Накопи 100000 🫙', icon: '🌟', check: (s) => s
                     .totalOil >= 100000 },
-            { id: 'click_10', name: 'Сила клика', desc: 'Улучши клик до 10 уровня', icon: '⚡', check: (s) => s
+            { id: 'oil_250000', name: 'Империя масла', desc: 'Накопи 250000 🫙', icon: '🏰', check: (s) => s
+                    .totalOil >= 250000 },
+            { id: 'oil_500000', name: 'Король масла', desc: 'Накопи 500000 🫙', icon: '👑', check: (s) => s
+                    .totalOil >= 500000 },
+            { id: 'oil_1000000', name: 'Миллионер', desc: 'Накопи 1000000 🫙', icon: '💫', check: (s) => s
+                    .totalOil >= 1000000 },
+            { id: 'oil_5000000', name: 'Магнат', desc: 'Накопи 5000000 🫙', icon: '🔥', check: (s) => s.totalOil >=
+                    5000000 },
+            { id: 'oil_99999999', name: '∞ Бесконечное масло', desc: 'Накопи 99999999 🫙', icon: '♾️', check: (
+                s) => s.totalOil >= 99999999 },
+        ];
+
+        // ---- Клик (12) ----
+        const clickAchievements = [
+            { id: 'click_1', name: 'Щелчок', desc: 'Улучши клик до 1 уровня', icon: '👆', check: (s) => s.clickLevel >=
+                    1 },
+            { id: 'click_5', name: 'Быстрый палец', desc: 'Улучши клик до 5 уровня', icon: '⚡', check: (s) => s
+                    .clickLevel >= 5 },
+            { id: 'click_10', name: 'Сила клика', desc: 'Улучши клик до 10 уровня', icon: '💪', check: (s) => s
                     .clickLevel >= 10 },
+            { id: 'click_15', name: 'Машина для кликов', desc: 'Улучши клик до 15 уровня', icon: '⚙️', check: (
+                s) => s.clickLevel >= 15 },
+            { id: 'click_20', name: 'Клик-мастер', desc: 'Улучши клик до 20 уровня', icon: '🎯', check: (s) => s
+                    .clickLevel >= 20 },
             { id: 'click_25', name: 'Мастер клика', desc: 'Улучши клик до 25 уровня', icon: '🔥', check: (s) => s
                     .clickLevel >= 25 },
-            { id: 'click_50', name: 'Легенда клика', desc: 'Улучши клик до 50 уровня', icon: '🔥', check: (s) => s
+            { id: 'click_30', name: 'Клик-легенда', desc: 'Улучши клик до 30 уровня', icon: '🌟', check: (s) => s
+                    .clickLevel >= 30 },
+            { id: 'click_40', name: 'Клик-император', desc: 'Улучши клик до 40 уровня', icon: '👑', check: (s) => s
+                    .clickLevel >= 40 },
+            { id: 'click_50', name: 'Легенда клика', desc: 'Улучши клик до 50 уровня', icon: '💫', check: (s) => s
                     .clickLevel >= 50 },
-            { id: 'passive_10', name: 'Пассивный доход', desc: 'Улучши пассивный доход до 10 уровня', icon: '🏭',
+            { id: 'click_75', name: 'Клик-бог', desc: 'Улучши клик до 75 уровня', icon: '👁️', check: (s) => s
+                    .clickLevel >= 75 },
+            { id: 'click_100', name: 'Клик-абсолют', desc: 'Улучши клик до 100 уровня', icon: '♾️', check: (s) => s
+                    .clickLevel >= 100 },
+            { id: 'click_999', name: '∞ Бесконечный клик', desc: 'Улучши клик до 999 уровня', icon: '∞', check: (
+                s) => s.clickLevel >= 999 },
+        ];
+
+        // ---- Пассивный доход (12) ----
+        const passiveAchievements = [
+            { id: 'passive_1', name: 'Пассивный доход', desc: 'Улучши пассивный доход до 1 уровня', icon: '🏭',
+                check: (s) => s.passiveLevel >= 1 },
+            { id: 'passive_5', name: 'Автоматизация', desc: 'Улучши пассивный доход до 5 уровня', icon: '⚡',
+                check: (s) => s.passiveLevel >= 5 },
+            { id: 'passive_10', name: 'Конвейер', desc: 'Улучши пассивный доход до 10 уровня', icon: '⚙️',
                 check: (s) => s.passiveLevel >= 10 },
-            { id: 'passive_25', name: 'Мастер пассива', desc: 'Улучши пассивный доход до 25 уровня', icon: '🏭',
+            { id: 'passive_15', name: 'Фабрика масла', desc: 'Улучши пассивный доход до 15 уровня', icon: '🏗️',
+                check: (s) => s.passiveLevel >= 15 },
+            { id: 'passive_20', name: 'Маслозавод', desc: 'Улучши пассивный доход до 20 уровня', icon: '🏭',
+                check: (s) => s.passiveLevel >= 20 },
+            { id: 'passive_25', name: 'Мастер пассива', desc: 'Улучши пассивный доход до 25 уровня', icon: '🔥',
                 check: (s) => s.passiveLevel >= 25 },
+            { id: 'passive_30', name: 'Пассив-легенда', desc: 'Улучши пассивный доход до 30 уровня', icon: '🌟',
+                check: (s) => s.passiveLevel >= 30 },
+            { id: 'passive_40', name: 'Пассив-император', desc: 'Улучши пассивный доход до 40 уровня', icon: '👑',
+                check: (s) => s.passiveLevel >= 40 },
+            { id: 'passive_50', name: 'Пассив-бог', desc: 'Улучши пассивный доход до 50 уровня', icon: '💫',
+                check: (s) => s.passiveLevel >= 50 },
+            { id: 'passive_75', name: 'Пассив-абсолют', desc: 'Улучши пассивный доход до 75 уровня', icon: '👁️',
+                check: (s) => s.passiveLevel >= 75 },
+            { id: 'passive_100', name: 'Вечный поток', desc: 'Улучши пассивный доход до 100 уровня', icon: '♾️',
+                check: (s) => s.passiveLevel >= 100 },
+            { id: 'passive_999', name: '∞ Бесконечный пассив', desc: 'Улучши пассивный доход до 999 уровня',
+                icon: '∞', check: (s) => s.passiveLevel >= 999 },
+        ];
+
+        // ---- Линейки (16) ----
+        const bottleAchievements = [
             { id: 'bottle_1', name: 'Первая линейка', desc: 'Купи первую линейку бутылок', icon: '🫙',
                 check: (s) => s.bottlesBought >= 1 },
-            { id: 'bottle_3', name: 'Коллекционер', desc: 'Купи 3 линейки бутылок', icon: '📦', check: (s) => s
+            { id: 'bottle_2', name: 'Две линейки', desc: 'Купи 2 линейки', icon: '🧴', check: (s) => s
+                    .bottlesBought >= 2 },
+            { id: 'bottle_3', name: 'Коллекционер', desc: 'Купи 3 линейки', icon: '📦', check: (s) => s
                     .bottlesBought >= 3 },
-            { id: 'bottle_6', name: 'Полная коллекция', desc: 'Купи все 6 линеек бутылок', icon: '🏛️',
-                check: (s) => s.bottlesBought >= 6 },
-            { id: 'bottle_upgrade_5', name: 'Мастер прокачки', desc: 'Прокачай любую линейку до 5 уровня', icon: '⬆️',
-                check: (s) => s.maxBottleLevel >= 5 },
-            { id: 'bottle_upgrade_10', name: 'Гуру прокачки', desc: 'Прокачай любую линейку до 10 уровня', icon: '⬆️',
-                check: (s) => s.maxBottleLevel >= 10 },
-            { id: 'bonus_combo', name: 'Бонусная комбинация', desc: 'Собери комбинацию из 4+ элементов', icon: '⭐',
-                check: (s) => s.bonusCombos >= 1 },
+            { id: 'bottle_4', name: 'Четыре линейки', desc: 'Купи 4 линейки', icon: '📊', check: (s) => s
+                    .bottlesBought >= 4 },
+            { id: 'bottle_5', name: 'Пять линеек', desc: 'Купи 5 линеек', icon: '🏆', check: (s) => s
+                    .bottlesBought >= 5 },
+            { id: 'bottle_6', name: 'Шесть линеек', desc: 'Купи 6 линеек', icon: '🏆', check: (s) => s
+                    .bottlesBought >= 6 },
+            { id: 'bottle_7', name: 'Семь линеек', desc: 'Купи 7 линеек', icon: '⭐', check: (s) => s
+                    .bottlesBought >= 7 },
+            { id: 'bottle_8', name: 'Восемь линеек', desc: 'Купи 8 линеек', icon: '⭐', check: (s) => s
+                    .bottlesBought >= 8 },
+            { id: 'bottle_9', name: 'Девять линеек', desc: 'Купи 9 линеек', icon: '🌟', check: (s) => s
+                    .bottlesBought >= 9 },
+            { id: 'bottle_10', name: 'Десять линеек', desc: 'Купи 10 линеек', icon: '🌟', check: (s) => s
+                    .bottlesBought >= 10 },
+            { id: 'bottle_11', name: 'Одиннадцать линеек', desc: 'Купи 11 линеек', icon: '💫', check: (s) => s
+                    .bottlesBought >= 11 },
+            { id: 'bottle_12', name: 'Полная коллекция', desc: 'Купи все 12 линеек', icon: '🏛️', check: (s) => s
+                    .bottlesBought >= 12 },
+            { id: 'bottle_upgrade_1', name: 'Первая прокачка', desc: 'Прокачай любую линейку до 2 уровня',
+                icon: '⬆️', check: (s) => s.maxBottleLevel >= 2 },
+            { id: 'bottle_upgrade_3', name: 'Средняя прокачка', desc: 'Прокачай любую линейку до 5 уровня',
+                icon: '⭐', check: (s) => s.maxBottleLevel >= 5 },
+            { id: 'bottle_upgrade_5', name: 'Мастер прокачки', desc: 'Прокачай любую линейку до 10 уровня',
+                icon: '🌟', check: (s) => s.maxBottleLevel >= 10 },
+            { id: 'bottle_upgrade_10', name: 'Гуру прокачки', desc: 'Прокачай любую линейку до 20 уровня',
+                icon: '👑', check: (s) => s.maxBottleLevel >= 20 },
+        ];
 
-            // Сессионные достижения (становятся вечными при первом разблокировании)
+        // ---- Бонусы (5) ----
+        const bonusAchievements = [
+            { id: 'bonus_1', name: 'Бонусная комбинация', desc: 'Собери комбинацию из 4+ элементов', icon: '⭐',
+                check: (s) => s.bonusCombos >= 1 },
+            { id: 'bonus_5', name: 'Сериал бонусов', desc: 'Собери 5 бонусных комбинаций', icon: '✨', check: (
+                s) => s.bonusCombos >= 5 },
+            { id: 'bonus_10', name: 'Бонус-мастер', desc: 'Собери 10 бонусных комбинаций', icon: '🌟', check: (
+                s) => s.bonusCombos >= 10 },
+            { id: 'bonus_25', name: 'Бонус-легенда', desc: 'Собери 25 бонусных комбинаций', icon: '💫', check: (
+                s) => s.bonusCombos >= 25 },
+            { id: 'bonus_100', name: '∞ Бонусный поток', desc: 'Собери 100 бонусных комбинаций', icon: '♾️',
+                check: (s) => s.bonusCombos >= 100 },
+        ];
+
+        // ---- Сессионные (6) ----
+        const sessionAchievements = [
             { id: 'session_combo_25', name: 'Быстрый старт', desc: 'Собери 25 комбинаций за одну игру', icon: '⚡',
                 session: true, check: (s) => s.sessionCombos >= 25 },
-            { id: 'session_combo_100', name: 'Ударный темп', desc: 'Собери 100 комбинаций за одну игру', icon: '🔥',
-                session: true, check: (s) => s.sessionCombos >= 100 },
+            { id: 'session_combo_100', name: 'Ударный темп', desc: 'Собери 100 комбинаций за одну игру',
+                icon: '🔥', session: true, check: (s) => s.sessionCombos >= 100 },
             { id: 'session_combo_500', name: 'Марафонец', desc: 'Собери 500 комбинаций за одну игру', icon: '🏃',
                 session: true, check: (s) => s.sessionCombos >= 500 },
-            { id: 'session_oil_5000', name: 'Богатство за сессию', desc: 'Накопи 5000 🫙 за одну игру', icon: '💰',
-                session: true, check: (s) => s.sessionOil >= 5000 },
+            { id: 'session_oil_5000', name: 'Богатство за сессию', desc: 'Накопи 5000 🫙 за одну игру',
+                icon: '💰', session: true, check: (s) => s.sessionOil >= 5000 },
             { id: 'session_oil_50000', name: 'Капитал сессии', desc: 'Накопи 50000 🫙 за одну игру', icon: '💎',
                 session: true, check: (s) => s.sessionOil >= 50000 },
-            { id: 'session_click_5', name: 'Скоростной клик', desc: 'Улучши клик до 5 уровня за одну игру', icon: '⚡',
-                session: true, check: (s) => s.sessionClickLevel >= 5 },
-            { id: 'session_passive_5', name: 'Пассивная мощь', desc: 'Улучши пассивный доход до 5 уровня за одну игру',
-                icon: '🏭', session: true, check: (s) => s.sessionPassiveLevel >= 5 },
-            { id: 'session_bottles_3', name: 'Коллекционер за сессию', desc: 'Купи 3 линейки за одну игру', icon: '📦',
-                session: true, check: (s) => s.sessionBottlesBought >= 3 },
+            { id: 'session_click_5', name: 'Скоростной клик', desc: 'Улучши клик до 5 уровня за одну игру',
+                icon: '⚡', session: true, check: (s) => s.sessionClickLevel >= 5 },
         ];
+
+        ACHIEVEMENTS.push(...comboAchievements);
+        ACHIEVEMENTS.push(...oilAchievements);
+        ACHIEVEMENTS.push(...clickAchievements);
+        ACHIEVEMENTS.push(...passiveAchievements);
+        ACHIEVEMENTS.push(...bottleAchievements);
+        ACHIEVEMENTS.push(...bonusAchievements);
+        ACHIEVEMENTS.push(...sessionAchievements);
+
+        // ИТОГО: 20+15+12+12+16+5+6 = 86 достижений
 
         const BOARD_SIZE = 8;
         let board = [];
@@ -1323,7 +1787,10 @@
         let passiveUpgradeCost = 25;
         let bottleLines = [];
 
-        // ===== СТАТИСТИКА ДЛЯ ДОСТИЖЕНИЙ =====
+        // ===== ЗАПУЩЕННЫЕ БУТЫЛКИ (для совместимости) =====
+        let launchedBottles = [];
+
+        // ===== СТАТИСТИКА =====
         let stats = {
             totalCombos: 0,
             totalOil: 0,
@@ -1332,7 +1799,7 @@
             bottlesBought: 0,
             maxBottleLevel: 0,
             bonusCombos: 0,
-            // Сессионная статистика (обнуляется при загрузке)
+            launchedBottles: [],
             sessionCombos: 0,
             sessionOil: 0,
             sessionClickLevel: 0,
@@ -1340,29 +1807,8 @@
             sessionBottlesBought: 0
         };
 
-        // ===== СОСТОЯНИЕ ДОСТИЖЕНИЙ =====
-        // Все разблокированные достижения сохраняются здесь навсегда
+        // ===== ДОСТИЖЕНИЯ =====
         let unlockedAchievements = {};
-
-        // ===== ЗАГРУЗКА СОХРАНЕНИЙ =====
-        function loadAchievements() {
-            try {
-                const saved = localStorage.getItem('sarepta_achievements');
-                if (saved) {
-                    unlockedAchievements = JSON.parse(saved);
-                }
-            } catch (e) {
-                console.warn('Не удалось загрузить достижения');
-            }
-        }
-
-        function saveAchievements() {
-            try {
-                localStorage.setItem('sarepta_achievements', JSON.stringify(unlockedAchievements));
-            } catch (e) {
-                console.warn('Не удалось сохранить достижения');
-            }
-        }
 
         // ===== DOM =====
         const oilEl = document.getElementById('oilCount');
@@ -1384,6 +1830,9 @@
         const achievementsOverlay = document.getElementById('achievementsOverlay');
         const achievementsList = document.getElementById('achievementsList');
         const achBadge = document.getElementById('achBadge');
+        const bottlesOverlay = document.getElementById('bottlesOverlay');
+        const bottlesList = document.getElementById('bottlesList');
+        const bottlesBadge = document.getElementById('bottlesBadge');
 
         // ===== ВСПОМОГАТЕЛЬНЫЕ =====
         function getRandomBottle() {
@@ -1441,13 +1890,13 @@
         function checkAchievements() {
             let newUnlock = false;
 
+            stats.launchedBottles = launchedBottles.map(b => b.id);
+
             ACHIEVEMENTS.forEach(ach => {
                 const isUnlocked = !!unlockedAchievements[ach.id];
 
                 if (!isUnlocked && ach.check(stats)) {
-                    // Разблокируем достижение — оно становится вечным навсегда!
                     unlockedAchievements[ach.id] = true;
-                    saveAchievements();
                     newUnlock = true;
                     showAchievementToast(ach);
                 }
@@ -1484,49 +1933,157 @@
         function renderAchievements() {
             achievementsList.innerHTML = '';
 
-            // Все достижения (без разделения — все вечные)
-            const section = document.createElement('div');
-            section.innerHTML = '<div class="achievement-section-title">🌟 Все достижения (сохраняются навсегда)</div>';
-            achievementsList.appendChild(section);
+            const categories = {
+                '🌾 Комбинации': ACHIEVEMENTS.filter(a => a.id.startsWith('combo_') && !a.session),
+                '🫙 Масло': ACHIEVEMENTS.filter(a => a.id.startsWith('oil_')),
+                '⚡ Клик': ACHIEVEMENTS.filter(a => a.id.startsWith('click_')),
+                '🏭 Пассивный доход': ACHIEVEMENTS.filter(a => a.id.startsWith('passive_')),
+                '🫙 Линейки': ACHIEVEMENTS.filter(a => a.id.startsWith('bottle_')),
+                '⭐ Бонусы': ACHIEVEMENTS.filter(a => a.id.startsWith('bonus_')),
+                '⚡ Сессионные': ACHIEVEMENTS.filter(a => a.session),
+            };
 
-            ACHIEVEMENTS.forEach(ach => {
-                const isUnlocked = !!unlockedAchievements[ach.id];
-                const item = createAchievementItem(ach, isUnlocked);
-                achievementsList.appendChild(item);
+            Object.keys(categories).forEach(catName => {
+                const items = categories[catName];
+                if (items.length === 0) return;
+
+                const section = document.createElement('div');
+                section.innerHTML =
+                    `<div class="achievement-section-title">${catName}</div>`;
+                achievementsList.appendChild(section);
+
+                items.forEach(ach => {
+                    const isUnlocked = !!unlockedAchievements[ach.id];
+                    const item = document.createElement('div');
+                    item.className = `achievement-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+
+                    const isSession = ach.session || false;
+                    const typeLabel = isSession ? '⚡ За эту игру' : '';
+
+                    item.innerHTML = `
+                        <div class="ach-icon">${ach.icon}</div>
+                        <div class="ach-info">
+                            <div class="ach-name">${ach.name}</div>
+                            <div class="ach-desc">${ach.desc}</div>
+                            ${typeLabel ? `<div style="font-size:9px;color:#7a643a;margin-top:2px;">${typeLabel}</div>` : ''}
+                            <div class="ach-progress">
+                                <div class="ach-progress-bar" style="width:${isUnlocked ? 100 : 0}%"></div>
+                            </div>
+                        </div>
+                        <div class="ach-status">${isUnlocked ? '✅' : '🔒'}</div>
+                    `;
+
+                    achievementsList.appendChild(item);
+                });
             });
 
             updateAchievementBadge();
         }
 
-        function createAchievementItem(ach, isUnlocked) {
-            const item = document.createElement('div');
-            item.className = `achievement-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+        // ===== МЕНЮ ЗАПУСКА БУТЫЛОК (теперь просто информационное) =====
+        function renderBottlesMenu() {
+            bottlesList.innerHTML = '';
 
-            const isSession = ach.session || false;
-            const typeLabel = isSession ? '⚡ За эту игру' : '🌟 Вечное';
+            // Показываем все 12 линеек с их статусом
+            BOTTLE_LINES_CONFIG.forEach(config => {
+                const isOwned = bottleLines.some(l => l.id === config.id);
 
-            item.innerHTML = `
-                <div class="ach-icon">${ach.icon}</div>
-                <div class="ach-info">
-                    <div class="ach-name">${ach.name}</div>
-                    <div class="ach-desc">${ach.desc}</div>
-                    <div>
-                        <span class="ach-badge-session">${typeLabel}</span>
-                        ${isUnlocked ? '<span class="ach-first-unlock">✅ Сохранено навсегда</span>' : ''}
-                    </div>
-                    <div class="ach-progress">
-                        <div class="ach-progress-bar" style="width:${isUnlocked ? 100 : 0}%"></div>
-                    </div>
-                </div>
-                <div class="ach-status">${isUnlocked ? '✅ Разблокировано' : '🔒 Заблокировано'}</div>
-            `;
+                const card = document.createElement('div');
+                card.className = `bottle-card ${isOwned ? 'launched' : ''}`;
 
-            return item;
+                const icon = document.createElement('div');
+                icon.className = 'bottle-icon';
+                icon.innerHTML = bottleToHTML(BOTTLE_STYLES[config.iconIndex]);
+
+                const info = document.createElement('div');
+                info.className = 'bottle-info';
+                const existing = bottleLines.find(l => l.id === config.id);
+                info.innerHTML = `
+                    <div class="bottle-name">${config.name}</div>
+                    <div class="bottle-desc">${isOwned ? `Уровень ${existing ? existing.level : 0}` : 'Доступна для покупки'}</div>
+                    <div class="bottle-stats">+${isOwned ? (existing ? existing.income.toFixed(1) : config.baseIncome) : config.baseIncome} 🫙/сек</div>
+                `;
+
+                const btn = document.createElement('button');
+                btn.className = 'launch-btn';
+                if (isOwned) {
+                    btn.textContent = '✅ Куплена';
+                    btn.disabled = true;
+                } else {
+                    btn.innerHTML = `
+                        <span class="price-icon">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='25' width='60' height='55' rx='12' fill='%23dbb063' stroke='%237a5f2e' stroke-width='4'/%3E%3Crect x='35' y='10' width='30' height='20' rx='6' fill='%23c9922b' stroke='%237a5f2e' stroke-width='3'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-size='28' fill='%231a3f5c' font-weight='bold'%3EМ%3C/text%3E%3C/svg%3E" alt="" />
+                        </span>
+                        ${config.baseCost}
+                    `;
+                    btn.classList.toggle('disabled', oil < config.baseCost);
+                    // Находим индекс в массиве BOTTLE_LINES_CONFIG
+                    const idx = BOTTLE_LINES_CONFIG.indexOf(config);
+                    btn.addEventListener('click', () => {
+                        // Ищем элемент в сетке
+                        const items = document.querySelectorAll('.bottle-item');
+                        const targetItem = items[idx];
+                        if (targetItem) {
+                            buyBottleLine(idx, targetItem);
+                        } else {
+                            // Если не нашли, просто покупаем
+                            buyBottleLineDirect(idx);
+                        }
+                        renderBottlesMenu();
+                    });
+                }
+
+                card.appendChild(icon);
+                card.appendChild(info);
+                card.appendChild(btn);
+                bottlesList.appendChild(card);
+            });
+
+            bottlesBadge.textContent = bottleLines.length;
+            bottlesBadge.style.display = bottleLines.length > 0 ? 'flex' : 'none';
+        }
+
+        // Прямая покупка без элемента
+        function buyBottleLineDirect(index) {
+            const config = BOTTLE_LINES_CONFIG[index];
+            const cost = config.baseCost;
+
+            if (bottleLines.find(l => l.id === config.id)) {
+                showToast('❌ Уже куплено');
+                return;
+            }
+
+            if (oil < cost) {
+                showToast('❌ Недостаточно 🫙');
+                return;
+            }
+
+            oil -= cost;
+            stats.totalOil += cost;
+            stats.sessionOil += cost;
+
+            bottleLines.push({
+                id: config.id,
+                name: config.name,
+                income: config.baseIncome,
+                level: 1,
+                baseIncome: config.baseIncome,
+                baseCost: config.baseCost,
+                upgradeCost: config.upgradeCost
+            });
+
+            stats.bottlesBought++;
+            stats.sessionBottlesBought++;
+
+            showToast(`✅ Куплена "${config.name}" (+${config.baseIncome} 🫙/сек)`);
+            updateUI();
+            checkAchievements();
         }
 
         // ===== UI =====
         function updateUI() {
             const totalPassive = getTotalPassive();
+
             oilEl.textContent = Math.floor(oil);
             clickPowerEl.textContent = clickPower;
             clickPowerDisplay.textContent = clickPower;
@@ -1540,6 +2097,9 @@
 
             document.getElementById('upgradeClick').classList.toggle('disabled', oil < clickUpgradeCost);
             document.getElementById('upgradePassive').classList.toggle('disabled', oil < passiveUpgradeCost);
+
+            bottlesBadge.textContent = bottleLines.length;
+            bottlesBadge.style.display = bottleLines.length > 0 ? 'flex' : 'none';
 
             renderBottleGrid();
         }
@@ -2064,7 +2624,7 @@
             }
         }, 1000);
 
-        // ===== МОДАЛЬНОЕ ОКНО ДОСТИЖЕНИЙ =====
+        // ===== МОДАЛЬНЫЕ ОКНА =====
         document.getElementById('achievementsToggle').addEventListener('click', () => {
             renderAchievements();
             achievementsOverlay.classList.add('active');
@@ -2080,13 +2640,26 @@
             }
         });
 
+        document.getElementById('bottlesToggle').addEventListener('click', () => {
+            renderBottlesMenu();
+            bottlesOverlay.classList.add('active');
+        });
+
+        document.getElementById('closeBottles').addEventListener('click', () => {
+            bottlesOverlay.classList.remove('active');
+        });
+
+        bottlesOverlay.addEventListener('click', (e) => {
+            if (e.target === bottlesOverlay) {
+                bottlesOverlay.classList.remove('active');
+            }
+        });
+
         // ============================================================
         //  ИНИЦИАЛИЗАЦИЯ
         // ============================================================
 
         function init() {
-            loadAchievements();
-
             board = generateBoard();
             renderBoard();
             updateUI();
@@ -2097,17 +2670,7 @@
             document.getElementById('upgradePassive').addEventListener('click', buyPassiveUpgrade);
             document.getElementById('shuffleBtn').addEventListener('click', shuffleBoard);
 
-            // Проверяем достижения при старте
             checkAchievements();
-
-            // Для замены на вашу картинку (раскомментируйте):
-            // const logo = document.getElementById('brandLogo');
-            // logo.src = 'assets/sarepta.png';
-            // const bottle = document.getElementById('bottleImg');
-            // bottle.src = 'assets/sarepta.png';
-            // document.querySelectorAll('.icon img, .price-icon img, .toast-icon img').forEach(el => {
-            //     el.src = 'assets/sarepta.png';
-            // });
         }
 
         init();
