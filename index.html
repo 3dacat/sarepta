@@ -1463,75 +1463,86 @@
         //  КОНФИГУРАЦИЯ
         // ============================================================
 
+        // ВСЕГО 12 ТИПОВ БУТЫЛОК (Золотая — редкая, Синяя заменена на Белую)
         const BOTTLE_STYLES = [
+            // 0: Золотая (РЕДКАЯ — только 1 на поле)
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#dbb063" stroke="#7a5f2e" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#c9922b" stroke="#7a5f2e" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#f5e6b8" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
             </svg>`,
+            // 1: Белая (заменяет синюю)
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <rect x="22" y="28" width="56" height="52" rx="10" fill="#4a7a9c" stroke="#1a3f5c" stroke-width="3"/>
-                <rect x="34" y="10" width="32" height="22" rx="6" fill="#1a3f5c" stroke="#0b2b4a" stroke-width="2.5"/>
-                <circle cx="50" cy="54" r="12" fill="#8ab4d4" opacity="0.4"/>
-                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
+                <rect x="22" y="28" width="56" height="52" rx="10" fill="#f0ece4" stroke="#c8c4bc" stroke-width="3"/>
+                <rect x="34" y="10" width="32" height="22" rx="6" fill="#e8e4dc" stroke="#b8b4ac" stroke-width="2.5"/>
+                <circle cx="50" cy="54" r="12" fill="#fefcf8" opacity="0.4"/>
+                <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
             </svg>`,
+            // 2: Зелёная
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#7aab6a" stroke="#4a7a3a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#4a7a3a" stroke="#2a5a1a" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#b4d4a4" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`,
+            // 3: Красная
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#c97a6a" stroke="#8a4a3a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#8a4a3a" stroke="#5a2a1a" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#e4b4a4" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`,
+            // 4: Тёмная
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#5a4a3a" stroke="#3a2a1a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#3a2a1a" stroke="#1a0a00" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#8a7a6a" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`,
+            // 5: Светлая
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#f5e6b8" stroke="#d4b87a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#d4b87a" stroke="#b8944c" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#fef7e0" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
             </svg>`,
+            // 6: Фиолетовая
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#9b6ab8" stroke="#6a3a87" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#7a4a97" stroke="#5a2a77" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#c9a4e0" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`,
+            // 7: Оранжевая
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#e8a04a" stroke="#b8702a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#d08830" stroke="#a0601a" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#f5d4a4" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
             </svg>`,
+            // 8: Бирюзовая
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#4ab8b8" stroke="#1a8a8a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#2a9a9a" stroke="#1a6a6a" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#a4e4e4" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`,
+            // 9: Розовая
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#e87090" stroke="#b84a6a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#d05070" stroke="#a03a5a" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#f5b4c4" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#fef7e0" font-weight="bold">С</text>
             </svg>`,
-            // Новая: Серебряная
+            // 10: Серебряная
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#c0c0c0" stroke="#8a8a8a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#a8a8a8" stroke="#7a7a7a" stroke-width="2.5"/>
                 <circle cx="50" cy="54" r="12" fill="#e8e8e8" opacity="0.4"/>
                 <text x="50" y="62" text-anchor="middle" font-size="22" fill="#1a3f5c" font-weight="bold">С</text>
             </svg>`,
-            // Новая: Платиновая
+            // 11: Платиновая
             `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <rect x="22" y="28" width="56" height="52" rx="10" fill="#4a6a7a" stroke="#2a4a5a" stroke-width="3"/>
                 <rect x="34" y="10" width="32" height="22" rx="6" fill="#3a5a6a" stroke="#1a3a4a" stroke-width="2.5"/>
@@ -1540,20 +1551,26 @@
             </svg>`
         ];
 
-        // ВСЕ 12 ЛИНЕЕК (6 основных + 4 ультра + 2 новые)
+        // ВСЕ 12 ЛИНЕЕК (Синяя → Белая)
         const BOTTLE_LINES_CONFIG = [
-            { id: 'gold', name: 'Золотая', baseIncome: 0.5, baseCost: 200, upgradeCost: 150, iconIndex: 0 },
-            { id: 'blue', name: 'Синяя', baseIncome: 1.0, baseCost: 350, upgradeCost: 250, iconIndex: 1 },
-            { id: 'green', name: 'Зелёная', baseIncome: 1.8, baseCost: 550, upgradeCost: 400, iconIndex: 2 },
-            { id: 'red', name: 'Красная', baseIncome: 3.0, baseCost: 800, upgradeCost: 600, iconIndex: 3 },
-            { id: 'dark', name: 'Тёмная', baseIncome: 5.0, baseCost: 1200, upgradeCost: 900, iconIndex: 4 },
-            { id: 'light', name: 'Светлая', baseIncome: 8.0, baseCost: 1800, upgradeCost: 1300, iconIndex: 5 },
-            { id: 'purple', name: 'Фиолетовая', baseIncome: 2.5, baseCost: 2500, upgradeCost: 1800, iconIndex: 6 },
-            { id: 'orange', name: 'Оранжевая', baseIncome: 4.0, baseCost: 4000, upgradeCost: 2800, iconIndex: 7 },
-            { id: 'turquoise', name: 'Бирюзовая', baseIncome: 6.5, baseCost: 6500, upgradeCost: 4500, iconIndex: 8 },
-            { id: 'pink', name: 'Розовая', baseIncome: 10.0, baseCost: 10000, upgradeCost: 7000, iconIndex: 9 },
-            { id: 'silver', name: 'Серебряная', baseIncome: 12.0, baseCost: 14000, upgradeCost: 9500, iconIndex: 10 },
-            { id: 'platinum', name: 'Платиновая', baseIncome: 15.0, baseCost: 20000, upgradeCost: 13000, iconIndex: 11 }
+            { id: 'gold', name: 'Золотая', baseIncome: 0.5, baseCost: 200, upgradeCost: 150, iconIndex: 0, rarity: 0.02 },
+            { id: 'white', name: 'Белая', baseIncome: 1.0, baseCost: 350, upgradeCost: 250, iconIndex: 1, rarity: 0.12 },
+            { id: 'green', name: 'Зелёная', baseIncome: 1.8, baseCost: 550, upgradeCost: 400, iconIndex: 2, rarity: 0.16 },
+            { id: 'red', name: 'Красная', baseIncome: 3.0, baseCost: 800, upgradeCost: 600, iconIndex: 3, rarity: 0.16 },
+            { id: 'dark', name: 'Тёмная', baseIncome: 5.0, baseCost: 1200, upgradeCost: 900, iconIndex: 4, rarity: 0.14 },
+            { id: 'light', name: 'Светлая', baseIncome: 8.0, baseCost: 1800, upgradeCost: 1300, iconIndex: 5, rarity: 0.12 },
+            { id: 'purple', name: 'Фиолетовая', baseIncome: 2.5, baseCost: 2500, upgradeCost: 1800, iconIndex: 6,
+            rarity: 0.10 },
+            { id: 'orange', name: 'Оранжевая', baseIncome: 4.0, baseCost: 4000, upgradeCost: 2800, iconIndex: 7,
+                rarity: 0.08 },
+            { id: 'turquoise', name: 'Бирюзовая', baseIncome: 6.5, baseCost: 6500, upgradeCost: 4500, iconIndex: 8,
+                rarity: 0.06 },
+            { id: 'pink', name: 'Розовая', baseIncome: 10.0, baseCost: 10000, upgradeCost: 7000, iconIndex: 9,
+            rarity: 0.04 },
+            { id: 'silver', name: 'Серебряная', baseIncome: 12.0, baseCost: 14000, upgradeCost: 9500, iconIndex: 10,
+                rarity: 0.03 },
+            { id: 'platinum', name: 'Платиновая', baseIncome: 15.0, baseCost: 20000, upgradeCost: 13000, iconIndex: 11,
+                rarity: 0.02 }
         ];
 
         // Дополнительные бутылки для запуска (уже не нужны, все в основных)
@@ -1836,7 +1853,17 @@
 
         // ===== ВСПОМОГАТЕЛЬНЫЕ =====
         function getRandomBottle() {
-            return BOTTLE_STYLES[Math.floor(Math.random() * BOTTLE_STYLES.length)];
+            // Выбираем случайный тип с учётом редкости
+            const rarities = BOTTLE_LINES_CONFIG.map(c => c.rarity || 0.1);
+            const totalRarity = rarities.reduce((a, b) => a + b, 0);
+            let rand = Math.random() * totalRarity;
+            for (let i = 0; i < rarities.length; i++) {
+                rand -= rarities[i];
+                if (rand <= 0) {
+                    return BOTTLE_STYLES[i];
+                }
+            }
+            return BOTTLE_STYLES[0];
         }
 
         function bottleToHTML(svg) {
@@ -2283,7 +2310,7 @@
             checkAchievements();
         }
 
-        // ===== ГЕНЕРАЦИЯ ПОЛЯ =====
+        // ===== ГЕНЕРАЦИЯ ПОЛЯ (С УЧЁТОМ РЕДКОСТИ) =====
         function hasMatches(board) {
             for (let r = 0; r < BOARD_SIZE; r++) {
                 for (let c = 0; c < BOARD_SIZE; c++) {
@@ -2297,14 +2324,23 @@
 
         function generateBoard() {
             const newBoard = [];
-            for (let r = 0; r < BOARD_SIZE; r++) {
-                const row = [];
-                for (let c = 0; c < BOARD_SIZE; c++) {
-                    row.push(getRandomBottle());
+            let attempts = 0;
+            const maxAttempts = 100;
+
+            do {
+                newBoard.length = 0;
+                for (let r = 0; r < BOARD_SIZE; r++) {
+                    const row = [];
+                    for (let c = 0; c < BOARD_SIZE; c++) {
+                        row.push(getRandomBottle());
+                    }
+                    newBoard.push(row);
                 }
-                newBoard.push(row);
-            }
-            while (hasMatches(newBoard)) {
+                attempts++;
+            } while (hasMatches(newBoard) && attempts < maxAttempts);
+
+            // Если после 100 попыток всё ещё есть совпадения — принудительно убираем
+            if (hasMatches(newBoard)) {
                 for (let r = 0; r < BOARD_SIZE; r++) {
                     for (let c = 0; c < BOARD_SIZE; c++) {
                         if (
@@ -2318,6 +2354,7 @@
                     }
                 }
             }
+
             return newBoard;
         }
 
